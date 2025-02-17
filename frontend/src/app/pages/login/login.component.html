@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="card">
+    
+
+    <h3 class="text-center">Iniciar sesión</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="label">Correo</label>
+        <input type="email" formControlName="correo" class="form-control" placeholder="Correo electrónico">
+      </div>
+
+      <div class="mb-3">
+        <label class="label">Contraseña</label>
+        <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña">
+      </div>
+
+      <button type="submit" class="btn">Iniciar sesión</button>
+
+      <p class="text-center text-danger">{{ errorMessage }}</p> <!-- Mensaje de error -->
+    </form>
+  </div>
+</div>
