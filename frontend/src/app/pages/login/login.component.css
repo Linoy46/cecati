@@ -1,5 +1,4 @@
 body {
-  background-color: #005bbb;
   font-family: Arial, sans-serif;
 }
 
@@ -77,3 +76,4 @@ form {
 .text-decoration-none:hover {
   text-decoration: underline;
 }
+  

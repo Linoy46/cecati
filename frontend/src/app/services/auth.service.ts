@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = 'http://localhost/cecati-login-backend/auth.php'; // Cambia la URL al backend en PHP
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(correo: string, contrasena: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { correo, contrasena });
+    return this.http.post(this.apiUrl, { correo, contrasena });
   }
 
   logout(): void {
