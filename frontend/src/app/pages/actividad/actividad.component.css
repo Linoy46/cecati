@@ -1,0 +1,219 @@
+
+body {
+    font-family: sans-serif; /* Or choose a suitable font */
+    margin: 0; /* Remove default body margin */
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+  }
+  
+  .main-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+  }
+  
+  .logo{
+      width: 150px; /*adjust as per your logo size*/
+      height: auto;
+      margin-right: 20px;
+  }
+  
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;  /* For responsiveness */
+  
+  }
+  
+  .nav-list li {
+    margin-right: 20px; /* Spacing between nav items */
+  }
+  
+  .nav-list a {
+    color: white;
+    text-decoration: none;
+    padding-bottom: 5px; /* Visual separation */
+     transition: border-bottom 0.2s ease;  /* Smooth transition */
+  
+  }
+  
+  .nav-list a:hover, .nav-list a.active {
+     border-bottom: 2px solid white; /* Underline on hover/active */
+  }
+  
+  /* Dropdown Styles (if you add a dropdown)*/
+  .dropdown-toggle {
+      cursor: pointer;
+  }
+  .dropdown-menu{
+    display: none; /*Hidden by default*/
+    position: absolute;
+    background-color: #a7780a;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 120px; /*Adjust as necessary*/
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 10; /* Ensure it's above other content */
+  }
+  .dropdown-menu li{
+      padding: 8px 12px;
+      border-bottom: 1px solid #ddd; /*Subtle divider*/
+  }
+  .dropdown-menu a{
+      display: block; /*Make the entire area clickable*/
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+  }
+  
+  /*Show dropdown on hover*/
+  .nav-list li:hover .dropdown-menu{
+    display: block;
+  }
+  
+  .user-settings {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* Spacing between buttons*/
+  }
+  .settings-button, .profile-button{
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2rem; /*adjust the icon sizes */
+      cursor: pointer;
+      padding: 5px; /* Add some padding around the icons*/
+      border-radius: 50%;  /* Make them circular */
+  }
+  
+  .settings-button:hover, .profile-button:hover{
+      background-color: rgba(255,255,255, 0.2); /*Slightly lighter on hover*/
+  }
+  
+  .breadcrumb {
+    padding: 10px 20px;
+    background-color: #eee; /* Light gray background for the breadcrumb */
+    color: #555;
+      margin-bottom: 20px;
+  }
+  
+  /* Main Content Area */
+  .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 20px;
+      flex-wrap: wrap; /* Allows wrapping for smaller screens */
+      gap: 30px;      /* Space between main section and calendar */
+  
+  }
+  
+  .task-section {
+    flex: 3; /* Takes up 3/4 of the space */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  .task-title{
+      margin-bottom: 5px; /* Add some space below */
+  
+  }
+  
+  .task-info {
+    display: flex;
+    gap: 20px; /* Space between professor and date */
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .task-details h2 {
+    margin-bottom: 10px;
+  }
+  
+  .task-details p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  .file-upload{
+      margin-bottom: 20px;
+  }
+  
+  .file-upload label {
+    display: block;
+    margin-bottom: 8px;
+      font-weight: bold;
+  }
+  .upload-button {
+      background-color: #a7780a;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex; /* Use flexbox for aligning icon & text */
+      align-items: center; /* Vertically center */
+      gap: 8px; /* Space between text and icon */
+      transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  .upload-button:hover{
+      background-color: #7e5c07;  /* Darken on hover */
+  
+  }
+  .upload-icon{
+      font-size: 1.2em; /* Make the icon a bit larger */
+  }
+  
+  .comments-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+  }
+  
+  .comment-input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 80px;
+      margin-bottom: 10px;
+  
+  }
+  
+  /* Calendar Section */
+  .calendar-section {
+    flex: 1; /* Takes up 1/4 of the space */
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+      position: sticky;
+      top: 20px; /* Adjust as needed to keep it visible */
+  }
+  
+  .calendar table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .calendar th,
+  .calendar td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  .calendar th {
+    background-color: #f0f0f0;
+  }
+  
+  .calendar caption{
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+  }
+  

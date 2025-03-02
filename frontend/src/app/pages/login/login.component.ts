@@ -18,25 +18,32 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      correo: ['', [Validators.required, Validators.email]],  // Asegurar que es un email válido
-      contrasena: ['', Validators.required] 
+      correo: ['', [Validators.required, Validators.email]],  
+      contrasena: ['', Validators.required]  
     });
   }
-
+  goBack() {
+    this.router.navigate(['/']); 
+  }
   onSubmit() {
     if (this.loginForm.invalid) {
       this.errorMessage = 'Por favor, completa todos los campos correctamente.';
       return;
     }
-
-    const { correo, contrasena } = this.loginForm.value;
+  
+    const { correo, contrasena } = this.loginForm.value; 
     console.log('Enviando datos:', { correo, contrasena });
-
+  
     this.authService.login(correo, contrasena).subscribe({
       next: (response) => {
         console.log('Respuesta del backend:', response);
-        this.authService.guardarToken(response.token);
-        this.router.navigate(['/tablas']);
+  
+        if (response.mensaje === 'Login exitoso') {
+          this.errorMessage = '';  // Limpiar mensaje de error
+          this.router.navigate(['/cursos']);  // Redirigir a la página de cursos
+        } else {
+          this.errorMessage = response.error || 'Error desconocido al iniciar sesión';
+        }
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error en el login:', error);

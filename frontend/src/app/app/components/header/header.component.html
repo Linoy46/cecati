@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CECATI 82</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            line-height: 1.5;
+            color: #52565b;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .top-nav {
+            background-color: #611232;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo_esc {
+            width: auto;
+            height: 50px;
+            display: inline-block;
+            padding: 2px;
+        }
+
+        .logo_ceca {
+            width: auto;
+            height: 50px;
+            display: inline-block;
+            padding: 2px;
+        }
+
+        .logo-container {
+           display: flex;
+           align-items: center;
+        }
+
+        .header {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #a48138;
+            padding: 10px 10%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 25px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            font-weight: 700;
+        }
+
+        .navigation ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navigation ul li {
+            position: relative;
+        }
+
+        .navigation ul li a {
+            font-size: 16px;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .navigation ul li a:hover {
+            background-color: #cfc7c77c;
+        }
+
+        .navigation ul li ul {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            width: 200px;
+            background-color: rgba(1, 1, 1, 0.7);
+            display: none;
+            z-index: 1001;
+        }
+
+        .navigation ul li ul li {
+            width: 100%;
+        }
+
+        .navigation ul li ul li a {
+            font-size: 16px;
+            text-transform: capitalize;
+            white-space: nowrap;
+            padding: 10px 15px;
+        }
+        .navigation ul li ul li a:hover{
+             background-color: #cfc7c77c;
+        }
+
+        .navigation ul li:hover > ul {
+            display: block;
+        }
+
+        #toggle,
+        .header label {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu {
+            width: 45px;
+            height: 35px;
+        }
+        .login-button {
+            background-color: #611232;
+            color: white !important;
+            padding: 10px 15px !important;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+       .navigation ul li .login-button:hover{
+            background-color: #cfc7c77c;
+            color: black !important;
+        }
+
+        .navigation ul li a[href="/registro"] {
+            background-color:  #611232;
+            color: white !important;
+            padding: 10px 15px !important;
+            border-radius: 5px;
+            margin-left: 10px;
+         }
+          .navigation ul li a[href="/registro"]:hover{
+            background-color: #cfc7c77c;
+            color: black !important;
+        }
+
+        @media (max-width: 950px) {
+            .header {
+                padding: 10px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .logo{
+              margin-bottom: 1rem;
+            }
+
+            .header label {
+                display: block;
+                order: 1;
+            }
+
+            .navigation {
+                order: 2;
+                width: 100%;
+                display: none;
+                margin-top: 10px;
+            }
+
+            .navigation ul {
+                flex-direction: column;
+            }
+             .navigation ul li {
+                 width: 100%;
+             }
+
+            .navigation ul li a {
+               text-align: left;
+                padding: 10px 15px;
+            }
+
+              .navigation ul li ul {
+                position: static;
+                width: 100%;
+                 background-color: rgba(1, 1, 1, 0.7);
+              }
+
+             #toggle:checked ~ .navigation {
+                display: flex;
+                 flex-direction: column;
+            }
+            .login-button, .navigation ul li a[href="/registro"] {
+                margin-left: 0;
+                width: 100%; 
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+    
+<body>
+    <div class="top-nav">
+        <div class="logo-container">
+            <img src="../../../../assets/SEP_Logo_2019.png" alt="Logo SEP" class="logo_esc">
+            <img src="../../../../assets/ceca1.png" alt="Logo CECATI" class="logo_ceca">
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">CECATI 82</div>
+          <input type="checkbox" id="toggle">
+        <label for="toggle"><img class="menu" src="assets/img/menu.svg" alt="Menú"></label>
+        <nav class="navigation">
+            <ul>
+                <li><a href="https://www.dgcft.sems.gob.mx/" target="_blank">DGCFT</a></li>
+                <li><a href="https://www.cidfort.edu.mx/" target="_blank">CIDFORT</a></li>
+                <li>
+                    <a href="/inicio">Inicio</a>
+                    <ul>
+                        <li><a href="#somos">Quienes somos</a></li>
+                        <li><a href="#video">Video Institucional</a></li>
+                        <li><a href="#Galeria">Galería</a></li>
+                        <li><a href="#conocer">Centro Evaluador</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#Calendario">Calendario</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/informes">Informes</a>
+                    <ul>
+                        <li><a href="/informes#Directorio">Directorio</a></li>
+                        <li><a href="/informes#Requisitos">Requisitos</a></li>
+                        <li><a href="/informes#Ubicacion">Ubicación</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/tablas">Cursos</a>
+                    <ul>
+                        <li><a href="/tablas">Cursos</a></li>
+                        <li><a href="/organigrama">Organigrama</a></li>
+                    </ul>
+                </li>
+                <li><a href="/sugerencias">Sugerencias</a></li>
+                 <li>
+                    <a href="/login" class="login-button">Iniciar Sesión</a>
+                </li>
+                <li>
+                    <a href="/registro">Registrarse</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+</body>
+</html>

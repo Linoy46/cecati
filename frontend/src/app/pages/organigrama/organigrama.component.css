@@ -1,0 +1,17 @@
+.contenedor-organi{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-organi img {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}

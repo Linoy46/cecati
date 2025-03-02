@@ -1,0 +1,22 @@
+<div class="container">
+    
+    <div class="content">
+      <aside class="especialidades">
+        <h2>ESPECIALIDADES</h2>
+        <ul>
+          <li *ngFor="let especialidad of especialidades">{{ especialidad }}</li>
+        </ul>
+      </aside>
+  
+      <main class="cursos">
+        <h2>Cursos Disponibles</h2>
+        <div class="cursos-grid">
+          <div class="curso" *ngFor="let curso of cursos">
+           
+            <h3>{{ curso.nombre }}</h3>
+            <p>{{ curso.especialidad }}</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>

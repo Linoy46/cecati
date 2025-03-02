@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="header">
+      <div class="logo">calificaciones</div>
+      <div class="user-icon"></div>
+    </div>
+  
+    <div class="student-info">
+      <div class="avatar"></div>
+      <div class="info">
+        <div class="name">{{ alumno.nombre }}</div>
+        <div class="matricula">{{ alumno.matricula }}</div>
+      </div>
+    </div>
+  
+    <table class="grades-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Profesor</th>
+          <th>Materia</th>
+     
+          <th>Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let calificacion of calificaciones; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ calificacion.profesor }}</td>
+          <td>{{ calificacion.materia }}</td>
+
+          <td>{{ calificacion.final }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

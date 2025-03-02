@@ -1,0 +1,203 @@
+.main-header {
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    /* Bordes redondeados (opcional) */
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between; /* Distribuye logos y nav */
+    align-items: center;
+    background-color:#611232;
+    padding: 5px 15px;
+    flex-wrap: wrap; /* Permite que la navegación se mueva hacia abajo en pantallas pequeñas */
+  }
+  
+  .logo-sep {
+    width: 90px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .logo-cecati {
+    width: 65px;
+    height: auto;
+  }
+  
+  
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Espacio entre enlaces y botón */
+    flex-grow: 1;       /* Ocupa el espacio disponible */
+    justify-content: space-between;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    margin-right: auto;
+  }
+  
+  .nav-links a {
+    color: white; /*Texto en blanco*/
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente al hover */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .auth-buttons{
+      display: flex;
+      gap: 10px;
+  }
+  .logout-button {
+    background-color: #611232;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .logout-button:hover {
+    background-color: #611232;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  /* Media query para pantallas pequeñas */
+  @media (max-width: 768px) {
+      .top-bar {
+          flex-direction: column; /* Apila logos y nav */
+          align-items: center;
+  
+      }
+  
+      .main-nav{
+          width: 100%;
+          justify-content: center;
+      }
+  
+      .nav-links, .auth-buttons{
+          justify-content: center; /* Centra en pantallas pequeñas */
+          width: 100%;
+          margin-top: 5px;
+      }
+  
+  }.main-header {
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    /* Bordes redondeados (opcional) */
+    border-radius: 0 0 12px 12px;
+  }
+  
+  .top-bar {
+    display: flex;
+    justify-content: space-between; /* Distribuye logos y nav */
+    align-items: center;
+    background-color: #611232;
+    padding: 5px 15px;
+    flex-wrap: wrap; /* Permite que la navegación se mueva hacia abajo en pantallas pequeñas */
+  }
+  
+  .logo-sep {
+    width: 90px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .logo-cecati {
+    width: 65px;
+    height: auto;
+  }
+  
+  
+  .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px; /* Espacio entre enlaces y botón */
+    flex-grow: 1;       /* Ocupa el espacio disponible */
+    justify-content: space-between;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    margin-right: auto;
+  }
+  
+  .nav-links a {
+    color: white; /*Texto en blanco*/
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente al hover */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .auth-buttons{
+      display: flex;
+      gap: 10px;
+  }
+  .logout-button {
+    background-color: #58201a;
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  /* Media query para pantallas pequeñas */
+  @media (max-width: 768px) {
+      .top-bar {
+          flex-direction: column; /* Apila logos y nav */
+          align-items: center;
+  
+      }
+  
+      .main-nav{
+          width: 100%;
+          justify-content: center;
+      }
+  
+      .nav-links, .auth-buttons{
+          justify-content: center; /* Centra en pantallas pequeñas */
+          width: 100%;
+          margin-top: 5px;
+      }
+  
+  }

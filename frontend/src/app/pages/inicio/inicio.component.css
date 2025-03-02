@@ -1,153 +1,397 @@
-/* Header con dos colores */
-.header {
-    background: linear-gradient(to right, #6D1B36, #8D1432); /* Degradado de dos tonos */
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
+/*--------------------------------------------------------------
+# Estilos Generales
+--------------------------------------------------------------*/
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #444;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: #9b2242;
+}
+
+p {
+  text-align: justify;
+}
+
+.contenedor, .container-video {
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+  overflow: hidden;
+}
+
+/*--------------------------------------------------------------
+# Sección Hero
+--------------------------------------------------------------*/
+.contenedor-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+  min-height: 90vh;
+  background: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("../../../assets/plantel.jpg") no-repeat center center / cover;
+}
+
+.titulo {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1rem;
+  color: #b9975b;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.copy {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  font-weight: 300;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/*--------------------------------------------------------------
+# Quienes Somos
+--------------------------------------------------------------*/
+.subtitulo {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  margin: 2rem 0 3rem;
+  color: #9b2242;
+}
+
+.contenedor-conocenos, .contenedor-conocer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.contenedor-conocenos img, .contenedor-conocer img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.mision-conocenos, .infoconocer {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+.n-conocenos, .n-conocer {
+  margin-bottom: 0.5rem;
+  color: #9b2242;
+  font-size: 1.5rem;
+}
+
+.conocenos, .conocer {
+  margin-bottom: 1rem;
+}
+
+/*--------------------------------------------------------------
+# Video de presentación
+--------------------------------------------------------------*/
+.container-video {
+  padding: 40px 0;
+}
+
+.flexcontainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.cecavideo {
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: block;
+}
+
+/*--------------------------------------------------------------
+# Galerias
+--------------------------------------------------------------*/
+.section-gallery {
+  padding: 40px 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.item {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: scale(1.03);
+}
+
+.item::after {
+  content: attr(data-texto);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.5rem;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.item:hover::after {
+  opacity: 1;
+}
+
+.lightbox, .gallery {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.open, .gallery.open {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
+}
+
+.lightbox img, .gallery img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.close-area {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1001;
+}
+
+.close-area:hover {
+  color: #f44336;
+}
+
+.gallery {
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  align-content: flex-start;
+}
+
+.gallery img {
+  width: auto;
+  height: 150px;
+  margin: 10px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+/*--------------------------------------------------------------
+# Centro Evaluador
+--------------------------------------------------------------*/
+.contenedor-conocer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.contenedor-conocer img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.mision-conocenos,
+.infoconocer {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+.conocer,
+.info-requisitos {
+  margin-bottom: 1rem;
+}
+
+.n-conocer {
+  margin-bottom: 0.5rem;
+  color: #9b2242;
+  font-size: 1.5rem;
+}
+
+.info-requisitos strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.contenedor .contenedor-conocer .info-requisitos p {
+  text-align: center;
+}
+
+.clave,
+.te-certifica {
+  text-align: right;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .contenedor-conocer {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .top-bar {
-    display: flex;
-    align-items: center;
-    width: 100%;
+
+  .mision-conocenos, .infoconocer {
+    text-align: center;
+    width: 90%;
+  }
+
+  .clave,
+  .te-certifica {
+    text-align: center;
+  }
+}
+
+/*--------------------------------------------------------------
+# Calendario Escolar
+--------------------------------------------------------------*/
+.calendario {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.calendario img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/*--------------------------------------------------------------
+# Ajustes Responsivos (Media Queries)
+--------------------------------------------------------------*/
+@media (min-width: 576px) {
+  .gallery img {
+    height: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery img {
+    height: 250px;
+  }
+
+  .conocer-logo {
+    margin-bottom: 0;
+  }
+
+  .clave, .te-certifica {
+    flex: 0 0 auto;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .certificacion-info {
     justify-content: space-between;
   }
-  
-  /* Botón de ingresar camuflado */
-  .login-btn {
-    background: transparent;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+
+  .te-certifica {
+    text-align: right;
   }
-  
-  /* Menú de navegación */
-  .menu ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
+}
+
+@media (min-width: 992px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
   }
-  
-  .menu ul li {
-    position: relative;
+
+  .gallery img {
+    height: 180px;
   }
-  
-  .menu ul li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    display: block;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
   }
-  
-  .menu ul .dropdown-menu {
-    display: none;
-    position: absolute;
-    background: white;
-    color: black;
-    list-style: none;
-    padding: 10px;
-    top: 100%;
-    left: 0;
-    min-width: 150px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+
+  .gallery img {
+    height: 150px;
   }
-  
-  .menu ul .dropdown-menu li {
-    padding: 5px;
+}
+
+@media (max-width: 480px) {
+  .subtitulo {
+    font-size: 2rem;
+    margin: 1rem 0;
   }
-  
-  .menu ul .dropdown-menu li a {
-    color: black;
+
+  .contenedor {
+    padding: 30px 0;
   }
-  
-  .menu ul .dropdown:hover .dropdown-menu {
-    display: block;
+
+  .info-requisitos p {
+    font-size: 0.9rem;
   }
-  
-  /* Banner sin overlay */
-  .banner {
-    position: relative;
-    text-align: center;
+
+  .contenedor-conocer {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .banner img {
+
+  .mision-conocenos {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .title {
-    color: gold;
-    font-size: 24px;
-    font-weight: bold;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .subtitle {
-    color: white;
-    font-size: 18px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* Sección Nosotros */
-  .nosotros {
     text-align: center;
-    padding: 20px;
   }
-  
-  .nosotros h2 {
-    color: #6D1B36;
+
+  .infoconocer {
+    width: 100%;
+    margin: 1rem 0;
   }
-  
-  /* Sección Misión y Visión */
-  .info {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .card {
-    background: #f8f8f8;
-    padding: 20px;
-    text-align: center;
-    width: 300px;
-    border-radius: 8px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card img {
-    width: 50px;
-  }
-  
-  /* Footer con dos colores */
-  .footer {
-    background: linear-gradient(to right, #6D1B36, #8D1432);
-    color: white;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .footer-top {
-    padding: 10px;
-  }
-  
-  .footer-top nav a {
-    color: white;
-    margin: 0 10px;
-  }
-  
-  .footer-bottom {
-    padding: 10px;
-  }
-  
+}

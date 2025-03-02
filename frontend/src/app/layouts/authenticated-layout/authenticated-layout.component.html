@@ -1,0 +1,22 @@
+<header class="main-header">
+  <div class="top-bar">
+    <img src="../../../assets/SEP_Logo_2019.png" alt="Logo SEP" class="logo-sep">
+    <img src="../../../assets/ceca1.png" alt="Logo CECATI" class="logo-cecati">
+
+    <nav class="main-nav">
+      <div class="nav-links">
+        <a routerLink="/calificaciones" routerLinkActive="active">Calificaciones</a>
+        <a routerLink="/cursos" routerLinkActive="active">Cursos</a>
+        <a routerLink="/actividad" routerLinkActive="active">Actividad</a>
+      </div>
+
+      <div class="auth-buttons">
+        <button (click)="logout()" class="logout-button">Cerrar Sesión</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="content">
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Quejas y Sugerencias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles (matching the website theme) */
+        body {
+            font-family: 'Roboto', sans-serif; /* Consistent font */
+            margin: 0; /* Remove default body margins */
+            background-color: #fafafa; /* Light background, adjust as needed */
+            color: #333; /* Dark text for readability */
+        }
+
+        /* Main Container */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px; /* Add padding around the main content */
+            box-sizing: border-box; /* Include padding in width calculations */
+        }
+
+        /* Form Section */
+       section {
+            margin: 20px;
+            margin-top: 50px;
+            background: #fff; /* White background for the form */
+            padding: 40px;        /* More padding inside */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+            width: 100%;
+            max-width: 600px;  /* Wider form */
+            box-sizing: border-box;
+       }
+
+        /* Heading */
+        h3 {
+            text-align: center;
+            margin-bottom: 30px; /* Reduced margin */
+            color: #9b2242;     /* Maroon color from the logo */
+            font-size: 1.8rem;  /* Larger, more prominent heading */
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;  /* More space between label and input */
+            font-weight: bold;
+            color: #444;       /* Slightly darker label color */
+        }
+
+        input,
+        textarea {
+            margin-bottom: 20px; /* More space between inputs */
+            padding: 12px 15px; /* Larger padding */
+            border: 1px solid #ccc; /* Keep the border */
+            border-radius: 8px; /* Consistent rounded corners */
+            font-size: 16px;   /* Larger font size */
+            font-family: 'Roboto', sans-serif; /* Ensure font consistency */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+        }
+       
+       input:focus, textarea:focus{
+          border-color: #a48138;
+          outline: none;
+          box-shadow: 0 0 5px rgba(164, 129, 56, 0.5);
+       }
+
+        textarea {
+            resize: vertical; /* Allow vertical resizing */
+        }
+
+        /* Button Styling */
+        button {
+            padding: 12px 20px; /* Larger padding */
+            background-color: #9b2242; /* Maroon color */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Consistent rounded corners */
+            cursor: pointer;
+            font-size: 18px;   /* Larger font size */
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #a48138; /* Gold color on hover */
+            /* No need for text color change, white is good contrast */
+        }
+        /*Resposive*/
+        @media screen and (max-width: 768px) {
+            section{
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <h3>Formulario de Quejas o Sugerencias</h3>
+            <form id="formQuejas">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="from_name" required>
+
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="reply_to" required>
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="message" rows="5" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

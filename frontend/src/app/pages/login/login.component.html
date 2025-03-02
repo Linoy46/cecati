@@ -1,6 +1,8 @@
 <div class="container">
-  <div class="card">
-    
+  <div class="card position-relative">
+    <button type="button" class="btn btn-link position-absolute top-0 start-0 m-3" (click)="goBack()" style="text-decoration: none; font-size: 24px; color: #611232;">
+      &larr;
+    </button>
 
     <h3 class="text-center">Iniciar sesión</h3>
 
@@ -15,9 +17,8 @@
         <input type="password" formControlName="contrasena" class="form-control" placeholder="Contraseña">
       </div>
 
-      <button type="submit" class="btn">Iniciar sesión</button>
-
-      <p class="text-center text-danger">{{ errorMessage }}</p> <!-- Mensaje de error -->
+      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
     </form>
+    <p class="text-center text-danger mt-3">{{ errorMessage }}</p>
   </div>
 </div>

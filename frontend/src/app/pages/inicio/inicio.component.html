@@ -1,72 +1,189 @@
-<header class="header">
-    <div class="top-bar">
-      <button class="login-btn">🔍 INGRESAR</button>
-      <nav class="menu">
-        <ul>
-          <li><a href="#">INICIO</a></li>
-          <li class="dropdown">
-            <a href="#">INFORMES ▼</a>
-            <ul class="dropdown-menu">
-              <li><a href="#">General</a></li>
-              <li><a href="#">Específico</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#">CURSOS ▼</a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Disponibles</a></li>
-              <li><a href="#">Próximos</a></li>
-            </ul>
-          </li>
-          <li><a href="#">CONTACTO</a></li>
-        </ul>
-      </nav>
+<main>
+    <div class="contenedor-head" id="inicio">
+        <h1 class="titulo">CECATI 82 - Tlaxcala</h1>
+        <p class="copy">Somos Centros de Capacitación para el Trabajo Industrial.</p>
     </div>
-  </header>
-  
-  <!-- Banner sin overlay -->
-  <section class="banner">
-    <img src="assets/5_VTR_INSCRIPCION_CECATI_82.jpg" alt="CECATI 82">
-    <h1 class="title">CECATI - 82 TLAXCALA</h1>
-    <p class="subtitle">Somos Centros de Capacitación Para el Trabajo Industrial</p>
-  </section>
-  
-  <!-- Sección Nosotros -->
-  <section class="nosotros">
-    <h2>NOSOTROS</h2>
-    <p>
-      Somos Centros de Capacitación para el Trabajo Industrial (CECATI), y como planteles educativos estamos adscritos a la Dirección General de Centros de Formación para el Trabajo...
-    </p>
-  </section>
-  
-  <!-- Misión y Visión -->
-  <section class="info">
-    <div class="card">
-      <img src="assets/mision-icon.png" alt="Misión">
-      <h3>MISIÓN</h3>
-      <p>Formar permanentemente a las personas para el trabajo...</p>
+    <section class="contenedor" id="somos">
+        <h2 class="subtitulo">Quienes somos</h2>
+        <div class="contenedor-conocenos">
+            <p class="conocenos">Somos Centros de Capacitación para el Trabajo Industrial (CECATI), y como planteles
+                educativos estamos adscritos a la Dirección General de Centros de Formación para el Trabajo, que a su vez
+                depende de la Subsecretaría de Educación Media Superior (SEMS) de la Secretaría de Educación Pública Federal y
+                como tal, forma parte del Sistema Nacional de Educación Tecnológica del gobierno federal mexicano.</p>
+            <p class="conocenos">En la actualidad, México requiere de una reforma en casi todos sus niveles. La ciudadanía
+                exige mejores servicios públicos, un gobierno de calidad y que rinda cuentas de lo que hace, tiempos de
+                respuesta rápidos y sencillos. Las expectativas y demandas crecen y exigen resultados.</p>
+            <img src="../../../assets/icono-mision.png" alt="">
+            <div class="mision-conocenos">
+                <div class="conocenos" id="mision">
+                    <h3 class="n-conocenos">Misión</h3>
+                    <p>Formar permanentemente a las personas para y en el trabajo, contribuyendo a su desarrollo humano e inserción
+                        en el mercado laboral, coadyuvando así al desarrollo social y económico del país, a través de una estructura
+                        de servicios flexible, equitativa, de calidad y pertinente.</p>
+                </div>
+            </div>
+        </div>
+        <div class="contenedor-conocenos">
+            <img src="../../../assets/icono-vision.png" alt="">
+            <div class="mision-conocenos">
+                <div class="conocenos">
+                    <h3 class="n-conocenos">Visión</h3>
+                    <p>Formar permanentemente a las personas para y en el trabajo, contribuyendo a su desarrollo humano e inserción
+                        en el mercado laboral, coadyuvando así al desarrollo social y económico del país, a través de una estructura
+                        de servicios flexible, equitativa, de calidad y pertinente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="videooo" id="video">
+        <div class="container-video">
+            <h2 class="subtitulo">Vídeo Institucional</h2>
+            <div class="flexcontainer">
+                <div class="videopres">
+                    <video class="cecavideo" type="video/mp4" src="../../../assets/videos/Inicio/CECATI 82 Presentacion.mp4"
+                        alt="Video de Presentacion" preload="" controls></video>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-gallery" id="Galeria">
+        <div class="contenedor">
+            <h2 class="subtitulo">Galeria</h2>
+        </div>
+    
+    <div class="container">
+        <div class="item" style="background-image: url('assets/Administración/Banner.jpg');" data-texto="Administración"
+            (click)="openGallery(1)"></div>
+        <div class="item" style="background-image: url('assets/Alimentos/Banner.png');" data-texto="Alimentos y Bebidas"
+            (click)="openGallery(2)"></div>
+        <div class="item" style="background-image: url('assets/Normas/Banner.jfif');"
+            data-texto="Aplicación de Normas y Procedimientos Contables y Fiscales" (click)="openGallery(3)"></div>
+        <div class="item" style="background-image: url('assets/Ejecutiva/Banner.jpeg');" data-texto="Asistencia Ejecutiva"
+            (click)="openGallery(4)"></div>
+        <div class="item" style="background-image: url('assets/Prendas/banner.jpg');"
+            data-texto="Confección de Prendas de Vestir" (click)="openGallery(5)"></div>
+        <div class="item" style="background-image: url('assets/Moda/Banner.jpeg');" data-texto="Diseño de Moda"
+            (click)="openGallery(7)"></div>
+        <div class="item" style="background-image: url('assets/DibujoIndustrial/Banner.jpg');"
+            data-texto="Elaboración de Dibujos Arquitectónico e Industrial" (click)="openGallery(8)"></div>
+        <div class="item" style="background-image: url('assets/Estilismo/Banner.jpg');"
+            data-texto="Estilismo y Diseño de Imagen" (click)="openGallery(9)"></div>
+        <div class="item" style="background-image: url('assets/SoporteTecnico/Banner.jpg');"
+            data-texto="Soporte Técnico a Equipos y Sistemas Computacionales" (click)="openGallery(11)"></div>
+        <div class="item" style="background-image: url('assets/LenguaInglesa/Banner.jpg');"
+            data-texto="Uso de la Lengua Inglesa en Diversos Contextos" (click)="openGallery(12)"></div>
+        <div class="item" style="background-image: url('assets/Informatica/Banner.png');" data-texto="Informática"
+            (click)="openGallery(13)"></div>
     </div>
-    <div class="card">
-      <img src="assets/vision-icon.png" alt="Visión">
-      <h3>VISIÓN</h3>
-      <p>Ofrecer servicios educativos de calidad...</p>
+    <div id="gallery" class="gallery" [class.open]="isGalleryOpen" (click)="closeGallery($event)">
+        <div class="close-area" (click)="closeGallery($event)">✖</div>
+        <div id="gallery-content">
+            <img *ngFor="let image of selectedGallery" [src]="image" alt="Miniatura"
+                (click)="openLightbox(image, $event)">
+        </div>
     </div>
-  </section>
-  
-  <!-- Footer con dos colores -->
-  <footer class="footer">
-    <div class="footer-top">
-      <span>CECATI</span>
-      <nav>
-        <a href="#">DGCFT</a>
-        <a href="#">CDGRT</a>
-        <a href="#">SEP</a>
-      </nav>
+
+    <div id="lightbox" class="lightbox" [class.open]="isLightboxOpen" (click)="closeLightbox($event)">
+        <div class="close-area" (click)="closeLightbox($event)">✖</div>
+        <img id="lightbox-image" [src]="lightboxImageSrc" alt="Imagen en grande">
     </div>
-    <div class="footer-bottom">
-      <p>Horario de Atención</p>
-      <p>Lunes a Viernes: 08:00 A.M - 07:00 P.M</p>
-      <p>Sábado: 08:00 A.M - 01:00 P.M</p>
+ </section>
+ <section class="contenedor" id="conocer">
+    <h2 class="subtitulo">Centro Evaluador</h2>
+    <div class="contenedor-conocer">
+        <div class="mision-conocenos">
+            <div class="conocer">
+                <h3 class="n-conocer">Conocer</h3>
+                <p>El CECATI 82 es un Centro Evaluador acreditado por el Consejo Nacional de  Normalización y Certificación de Competencias Laborales (CONOCER) el cual impulsa la profesionalización del capital humano de diversos sectores productivos del país, a través de las competencias laborales.</p>
+            </div>
+        </div>
+            <img src="../../assets/Conocer.png" alt="">                <div class="infoconocer">
+            
+            <div class="info-requisitos">
+                
+                    CLAVE: <strong>CE1204-ECE12-10</strong>
+                    <br>
+                    <br>
+                    <strong>TE CERTIFICA EN:</strong>
+                    <br>
+                    <h3 class="n-conocer">Estándar de Competencia</h3>
+                    <br>
+                
+            </div>
+        </div>
     </div>
-  </footer>
-  
+    <div class="infoconocer">
+        <h3 class="n-conocer">EC0454 EJECUCIÓN DE CURSOS CON EL ENFOQUE DE COMPETENCIAS.</h3>
+        <p>Próposito del Estándar de Competencia, Este Estándar de Competencias Ejecución de cursos con el enfoque de competencias, describe las funciones que realiza una persona en la impartición de un cursos presencial de dominar y aplicar los cuatro saberes de que se compone toda competencia, saber conocer, saber hacer, saber ser y saaber convivir, planeación de la secuencia de aprendizaje, elaboración de matriz de evaluación e instrumentos de evaluación, la ejecución de sesiones presenciales con el apoyo de estrategias de enseñanza-aprendizaje y materiales de apoyo, así como, la evaluación de la sesión mediante procesos metacognitivos con el participante.</p>
+    </div>
+    <div class="infoconocer">
+        <h3 class="n-conocer">EC0105 ATENCIÓN AL CIUDADANO EN EL SECTOR PúBLICO.</h3>
+        <p>Próposito del Estándar de Competencia: Servir como referente para la evaluación y Certificación de las personas que prestan un servicio de atención personalizada al ciudadano en el Sector Público, desde la detección de las necesidades del servicio, la gestión y procesamiento de la información/documentación del servicio proporcionado, siguiendo los lineamientos institucionales.</p>
+    </div>
+    <div class="infoconocer">
+        <h3 class="n-conocer">Requisitos</h3>
+        <div class="info-requisitos">
+            <p>
+                Original y copia:
+                <br>
+                *Acta de nacimiento.
+                <br>
+                *INE.
+                <br>
+                *CURP.
+                <br>
+                *Último grado de estudios.
+                <br>
+                *1 fotografia tamaño infantil a color fondo blanco.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="contenedor" id="servicios">
+    <h2 class="subtitulo">Servicios</h2>
+    <div class="contenedor-conocer">
+        <div class="infoconocer">
+            <h3 class="n-conocer">RECONOCIMIENTO OFICIAL DE COMPETENCIA OCUPACIONAL “R.O.C.O.”</h3>
+            <p>Este servicio se ofrece a las personas interesadas en obtener la certificación oficial de sus conocimientos y destrezas independientemente de la forma de cómo lo hayan adquirido.</p>
+        </div>
+        <div class="info-requisitos">
+            <p>
+                <br>
+                <strong>*CAPACITACION PARA PERSONAS CON DISCAPACIDAD.</strong>
+                <br>
+                <strong>*ACCIONES MOVILES</strong>
+                <br>
+                <strong>*CURSOS REGULARES</strong> 
+                <br>
+                Capacitación a las empresas de acuerdo a sus necesidades
+            </p>
+        </div>
+        <div class="infoconocer">
+            <h3 class="n-conocer">Cursos regulares</h3>
+            <p>Permiten a los estudiantes adquirir los conocimientos teóricos-prácticos indispensables para su incorporación al medio laboral.</p>
+        </div>
+        <div class="infoconocer">
+            <h3 class="n-conocer">Cursos de extensión</h3>
+            <p>Son cursos de corta duración que complementan los conocimientos de cursos regulares y están dirigidos a todas las personas que desean capacitarse en un campo específico.</p>
+        </div>
+        <div class="infoconocer">
+            <h3 class="n-conocer">Sistema de Capacitación a Distancia (SICADI)</h3>
+            <p>Es una opción de capacitación para quienes por impedimento de tiempo y/o distancia no le permiten capacitarse. El sistema no exige la presencia continua del alumno en las aulas y talleres, lo que le permitirá un óptimo aprovechamiento de su tiempo, permitiéndole realizar sus actividades personales.</p>
+        </div>
+        <div class="infoconocer">
+            <h3 class="n-conocer">Capacitación Acelerada Específica (CAE)</h3>
+            <p>Cursos estructurados de acuerdo a las necesidades de empresas, asociaciones e instituciones, con el propósito de elevar la calidad y la productividad o en forma autodidacta, se otorga un diploma expedido por la Secretaría de Educación Pública (SEP).</p>
+        </div>
+    </div>
+</section>
+    <section id="Calendario">
+        <div class="calendario">
+            <br>
+            <section>
+                <h2 class="subtitulo">
+                    <p> Calendario Escolar 2024 - 2025 </p>
+                </h2>
+            </section>
+            <img src="../../../assets/Calendario escolar.png" alt="Calendario escolar 2024-2025" style="width:100%; height:100%;">
+        </div>
+    </section>

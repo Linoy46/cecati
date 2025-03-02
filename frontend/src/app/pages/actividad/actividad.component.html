@@ -1,0 +1,57 @@
+<div class="main-container">
+    
+    <div class="breadcrumb">
+      Cursos/ Administración/ Actividad1
+    </div>
+  
+    <main class="content">
+      <section class="task-section">
+        <h1 class="task-title">Tarea: Actividad 1</h1>
+        <div class="task-info">
+          <span class="professor-name">[Nombre del profesor]</span>
+          <span class="due-date">[Fecha]</span>
+        </div>
+  
+        <div class="task-details">
+          <h2>[Detalles de la Actividad]</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id aliquid obcaecati ad.
+            Assumenda voluptas dolorem, deserunt nisi sapiente nesciunt rerum ipsa blanditiis
+            soluta dolorum at consequuntur? Alias, laboriosam? Laboriosam, cumque?
+          </p>
+        </div>
+  
+        <div class="file-upload">
+          <label for="file-input">Sube tu archivo (Menos de 2MB)</label>
+           <button class="upload-button" (click)="fileInput.click()">  Agregar Archivo
+               <i class="fas fa-upload upload-icon"></i>  </button>
+          <input type="file" id="file-input" style="display: none;" #fileInput>  </div>
+  
+        <div class="comments-section">
+          <label for="comment-input">Comentarios de la actividad</label>
+          <textarea id="comment-input" class="comment-input" placeholder="Escribir un comentario"></textarea>
+        </div>
+      </section>
+  
+      <aside class="calendar-section">
+        <h2>Calendario</h2>
+        <div class="calendar">
+          <table>
+            <caption>febrero 2025</caption>
+            <thead>
+              <tr>
+                <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td></td><td></td><td></td><td></td><td>1</td><td>2</td><td>3</td></tr>
+              <tr><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+              <tr><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
+              <tr><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td></tr>
+              <tr><td>25</td><td>26</td><td>27</td><td>28</td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </aside>
+    </main>
+  </div>
