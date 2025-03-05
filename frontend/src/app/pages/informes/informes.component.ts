@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-informes',
-  imports: [],
+  
+  imports: [RouterModule],
   templateUrl: './informes.component.html',
   styleUrl: './informes.component.css'
 })

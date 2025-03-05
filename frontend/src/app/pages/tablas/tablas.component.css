@@ -1,179 +1,91 @@
+/* En tablas.component.css */
 
 .accordion {
-    width: 80%;
-    max-width: 900px;
-    margin: 40px auto;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 90%; /* Controla el ancho general. Puedes usar px, %, vw, etc. */
+  max-width: 1200px; /* Ancho máximo para pantallas grandes */
+  margin: 20px auto;  /* Centra el acordeón horizontalmente y añade margen */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Para que los bordes redondeados funcionen bien con el contenido */
 }
 
 .accordion-item {
-    border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; /* Línea separadora más sutil */
+  /* Quitamos el borde y el margen inferior del .accordion-item, ya que ahora tenemos .accordion */
 }
 
 .accordion-item:last-child {
-    border-bottom: none;
+    border-bottom: none; /* Quita el borde del último elemento */
 }
 
 .accordion-button {
-    background-color: #fff;
-    color: #333;
-    cursor: pointer;
-    padding: 15px;
-    width: 100%;
-    text-align: left;
-    font-size: 1.2em;
-    border: none;
-    outline: none;
-    transition: background-color 0.3s ease;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  background: #580420;
+  color: white;
+  padding: 15px 20px; /* Más espacioso */
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease; /* Transición suave al hacer hover */
+  font-size: 1.1em; /* Texto un poco más grande */
 }
 
 .accordion-button:hover {
-    background-color: #f0f0f0;
+    background-color: #7a052b; /* Un tono más oscuro al hacer hover */
+}
+
+.accordion-button .icon {
+  transition: transform 0.3s ease;
+  font-size: 1.2em; /* Icono un poco más grande*/
+}
+
+.accordion-button .icon.expanded {
+  transform: rotate(180deg);
 }
 
 .accordion-content {
-    display: none;
-    padding: 15px;
-    background-color: #f9f9f9;
-    font-size: 1em;
+  background: #f8f9fa;
+  padding: 20px; /* Más espacioso */
+  /*border-top: 1px solid #ddd;  Separador entre botón y contenido (opcional) */
 }
 
-.accordion-button.active .icon {
-    transform: rotate(180deg);
-}
-
-.icon {
-    transition: transform 0.3s ease;
-}
-
-@media (max-width: 768px) {
-    .accordion {
-        width: 100%;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    .accordion-button {
-        font-size: 1em;
-    }
-}
-
-/*--------------------------------------------------------------
-# Course Table Styles
---------------------------------------------------------------*/
 .table-container {
-    overflow-x: auto;
-    margin: 20px auto;
-    max-width: 90%;
+  overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
+  border-radius: 4px; /* Bordes redondeados para el contenedor */
+  overflow: hidden;   /* Para que el border-radius se aplique correctamente */
 }
+
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 14px;
+  width: 100%;
+  border-collapse: collapse;
+  /*  border: none;  Si quieres quitar *todos* los bordes de la tabla */
 }
+
 th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  padding: 12px 15px; /* Más espacioso */
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Línea separadora solo en la parte inferior */
 }
+
 th {
-    background-color: #7a2222;
-    color: white;
-}
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-tr:hover {
-    background-color: #f1f1f1;
+  background: #690415;
+  color: white;
+  font-weight: bold; /* Encabezados más prominentes */
 }
 
-
-/*--------------------------------------------------------------
-# Media Quiries
---------------------------------------------------------------*/
-@media screen and (max-width: 800px){
-    
-    .logo_esc {
-        width: 20%;
-    }
-
-    .logo_ceca{
-        width: 20%;
-    }
-
-    .titulo{
-        font-size: 40px;
-        margin: 16px 0 32px;
-    }
-    .subtitulo{
-        font-size: 40px;
-    }
-    .contenedor-conocenos img{
-        width: 60%;
-    }
-    .mision-conocenos{
-        width: 80%;
-    }
-    .cecavideo{
-        width: 100%;
-    }
-    .contenedor-info img{
-        width: auto;
-    }
-    .footer-content{
-        justify-content: center; 
-    }
-    .social-media{
-        width: 80%;
-        justify-content: space-evenly;
-    }
-    .social-media-icon{
-        margin-left: 0;
-    }
-    .social-media i{
-        margin-left: 0;
-    }
-    .contact-us{
-        text-align: center;
-        width: 80%;
-        margin-bottom: 40px;
-    }
-
-    .contact-us h2{
-        text-align: center;
-    }
-
-    .nav-links{
-        text-align: left;
-        width: 100%;
-    }
+tr:nth-child(even) { /* Filas pares con fondo ligeramente diferente (opcional) */
+    background-color: #f2f2f2;
+}
+tr:hover{
+    background-color: #ddd;
 }
 
-@media screen and (max-width: 500px){
-
-    .titulo{
-        font-size: 40px;
-    }
-
-    .copy{
-        font-size: 20px;
-        padding-left: 10px;
-    }
-
-    .social-media{
-        width: 100%;
-    }
-
-    .contact-us{
-        width: 90%;
-    }
-    
+.accordion-item p { /* Estilo para la descripción */
+  margin-bottom: 0.5em;
+  color: #666;
+  font-style: italic; /* Descripción en cursiva (opcional) */
 }

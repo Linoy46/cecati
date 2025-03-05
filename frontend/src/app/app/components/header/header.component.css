@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    line-height: 1.5;
+    color: #52565b;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.top-nav {
+    background-color: #611232;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo_esc {
+    width: auto;
+    height: 50px;
+    display: inline-block;
+    padding: 2px;
+}
+
+.logo_ceca {
+    width: auto;
+    height: 50px;
+    display: inline-block;
+    padding: 2px;
+}
+
+.logo-container {
+   display: flex;
+   align-items: center;
+}
+
+.header {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #a48138;
+    padding: 10px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    position: relative;
+}
+
+.logo {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navigation ul li {
+    position: relative;
+}
+
+.navigation ul li a {
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navigation ul li a:hover {
+    background-color: #cfc7c77c;
+}
+
+.navigation ul li ul {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 200px;
+    background-color: rgba(1, 1, 1, 0.7);
+    display: none;
+    z-index: 1001;
+}
+
+.navigation ul li ul li {
+    width: 100%;
+}
+
+.navigation ul li ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    padding: 10px 15px;
+}
+.navigation ul li ul li a:hover{
+     background-color: #cfc7c77c;
+}
+
+.navigation ul li:hover > ul {
+    display: block;
+}
+
+#toggle,
+.header label {
+    display: none;
+    cursor: pointer;
+}
+
+.menu {
+    width: 45px;
+    height: 35px;
+}
+.login-button {
+    background-color: #611232;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.navigation ul li .login-button:hover{
+    background-color: #cfc7c77c;
+    color: black !important;
+}
+
+.navigation ul li a[href="/registro"] {
+    background-color:  #611232;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 5px;
+    margin-left: 10px;
+ }
+  .navigation ul li a[href="/registro"]:hover{
+    background-color: #cfc7c77c;
+    color: black !important;
+}
+
+@media (max-width: 950px) {
+    .header {
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .logo{
+      margin-bottom: 1rem;
+    }
+
+    .header label {
+        display: block;
+        order: 1;
+    }
+
+    .navigation {
+        order: 2;
+        width: 100%;
+        display: none;
+        margin-top: 10px;
+    }
+
+    .navigation ul {
+        flex-direction: column;
+    }
+     .navigation ul li {
+         width: 100%;
+     }
+
+    .navigation ul li a {
+       text-align: left;
+        padding: 10px 15px;
+    }
+
+      .navigation ul li ul {
+        position: static;
+        width: 100%;
+         background-color: rgba(1, 1, 1, 0.7);
+      }
+
+     #toggle:checked ~ .navigation {
+        display: flex;
+         flex-direction: column;
+    }
+    .login-button, .navigation ul li a[href="/registro"] {
+        margin-left: 0;
+        width: 100%; 
+        text-align: center;
+    }
+}

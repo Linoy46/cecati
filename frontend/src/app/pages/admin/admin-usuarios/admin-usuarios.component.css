@@ -1,0 +1,13 @@
+/* Estilos básicos para la tabla y el formulario */
+.container {
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }

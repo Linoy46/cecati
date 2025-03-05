@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 export interface AuthResponse {
   mensaje?: string;
   correo?: string;
+  rol?: string;
   error?: string;
   sesion_activa: boolean;
 }
