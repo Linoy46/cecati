@@ -1,195 +1,194 @@
-<div class="container mt-4">
-    <h1>Administración de Contenido</h1>
+<h2>Administrar Contenido</h2>
 
-    @if (loading) {
-        <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Cargando...</span>
-            </div>
-        </div>
-    } @else if (error) {
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-    } @else {
-        <button class="btn btn-success mb-3" (click)="createCategory()">Crear Categoría</button>
-        <button class="btn btn-primary mb-3 ms-2" (click)="openCreateCourseModal()">Crear Curso</button>
+<button (click)="openCreateCourseModal()">Crear Nuevo Curso</button>
+<button (click)="openCreateCategoryModal()">Crear Nueva Categoría</button>
 
+<div *ngIf="loading()">Cargando...</div>
+<div *ngIf="error()" class="error-message">{{ error() }}</div>
 
-        @for (category of categories; track category.id) {
-            <div class="mb-5">
-                <div class="d-flex align-items-center">
-                    <h2>
-                        {{ category.nombre }}
-                        <span class="badge bg-secondary">
-                            {{ category.precio | currency:'USD':'symbol':'1.2-2' }}
-                        </span>
-                    </h2>
-                     <button class="btn btn-sm btn-outline-secondary ms-2" (click)="openEditCategoryModal(category)">
-                        Editar Categoría
-                    </button>
-                </div>
-                <p *ngIf="category.descripcion">{{ category.descripcion }}</p>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre del Curso</th>
-                            <th>Duración (horas)</th>
-                            <th>Hora de Inicio</th>
-                            <th>Hora de Término</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (course of category.cursos; track course.id) {
-                            <tr>
-                                <td>{{ course.id }}</td>
-                                <td>{{ course.nombre }}</td>
-                                <td>{{ course.duracion_horas }}</td>
-                                <td>{{ course.hora_inicio }}</td>
-                                <td>{{ course.hora_termino }}</td>
-                                <td>
-                                     <button class="btn btn-sm btn-warning me-2" (click)="openEditCourseModal(course)">Editar</button>
-                                    <button class="btn btn-sm btn-danger" (click)="deleteCourse(course.id)">Eliminar</button>
-                                </td>
-                            </tr>
-                        } @empty {
-                            <tr>
-                                <td colspan="6">No hay cursos disponibles para esta categoría.</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        }
-
-
-        <div class="modal" tabindex="-1" role="dialog" [class.d-block]="showCreateCourseModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Crear Nuevo Curso</h5>
-                        <button type="button" class="btn-close" aria-label="Close" (click)="closeCreateCourseModal()"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form (ngSubmit)="createCourse()" #courseForm="ngForm">
-                            <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre del Curso</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="newCourse.nombre" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="duracion_horas" class="form-label">Duración (horas)</label>
-                                <input type="number" class="form-control" id="duracion_horas" name="duracion_horas" [(ngModel)]="newCourse.duracion_horas" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="hora_inicio" class="form-label">Hora de Inicio</label>
-                                <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" [(ngModel)]="newCourse.hora_inicio" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="hora_termino" class="form-label">Hora de Término</label>
-                                <input type="time" class="form-control" id="hora_termino" name="hora_termino" [(ngModel)]="newCourse.hora_termino" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="categoriaId" class="form-label">Categoría</label>
-                                <select class="form-control" id="categoriaId" name="categoriaId" [(ngModel)]="newCourse.categoriaId" required>
-                                    <option *ngFor="let category of categories" [value]="category.id">{{ category.nombre }}</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary" [disabled]="!courseForm.valid">Crear Curso</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="closeCreateCourseModal()">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal" tabindex="-1" role="dialog" [class.d-block]="showEditCourseModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Curso</h5>
-                        <button type="button" class="btn-close" aria-label="Close" (click)="closeEditCourseModal()"></button>
-                    </div>
-                    <div class="modal-body">
-                        @if (selectedCourse) {
-                            <form (ngSubmit)="updateCourse()" #editCourseForm="ngForm">
-                                <input type="hidden" name="id" [(ngModel)]="selectedCourse.id">
-                                <div class="mb-3">
-                                    <label for="edit_nombre" class="form-label">Nombre del Curso</label>
-                                    <input type="text" class="form-control" id="edit_nombre" name="nombre" [(ngModel)]="selectedCourse.nombre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_duracion_horas" class="form-label">Duración (horas)</label>
-                                    <input type="number" class="form-control" id="edit_duracion_horas" name="duracion_horas" [(ngModel)]="selectedCourse.duracion_horas" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_hora_inicio" class="form-label">Hora de Inicio</label>
-                                    <input type="time" class="form-control" id="edit_hora_inicio" name="hora_inicio" [(ngModel)]="selectedCourse.hora_inicio" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_hora_termino" class="form-label">Hora de Término</label>
-                                    <input type="time" class="form-control" id="edit_hora_termino" name="hora_termino" [(ngModel)]="selectedCourse.hora_termino" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_categoriaId" class="form-label">Categoría</label>
-                                    <select class="form-control" id="edit_categoriaId" name="categoriaId" [(ngModel)]="selectedCourse.categoriaId" required>
-                                        <option *ngFor="let category of categories" [value]="category.id">{{ category.nombre }}</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary" [disabled]="!editCourseForm.valid">Guardar Cambios</button>
-                            </form>
-                        } @else {
-                            <p>No hay ningún curso seleccionado para editar.</p>
-                        }
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="closeEditCourseModal()">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal" tabindex="-1" role="dialog" [class.d-block]="showEditCategoryModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Editar Categoría</h5>
-                        <button type="button" class="btn-close" aria-label="Close" (click)="closeEditCategoryModal()"></button>
-                    </div>
-                    <div class="modal-body">
-                        @if (selectedCategory) {
-                            <form (ngSubmit)="updateCategory()" #editCategoryForm="ngForm">
-                                <input type="hidden" name="id" [(ngModel)]="selectedCategory.id">
-                                <div class="mb-3">
-                                    <label for="edit_category_nombre" class="form-label">Nombre de la Categoría</label>
-                                    <input type="text" class="form-control" id="edit_category_nombre" name="nombre" [(ngModel)]="selectedCategory.nombre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_category_descripcion" class="form-label">Descripción (opcional)</label>
-                                    <textarea class="form-control" id="edit_category_descripcion" name="descripcion" [(ngModel)]="selectedCategory.descripcion"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="edit_category_precio" class="form-label">Precio</label>
-                                    <input type="number" class="form-control" id="edit_category_precio" name="precio" [(ngModel)]="selectedCategory.precio" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary" [disabled]="!editCategoryForm.valid">Guardar Cambios</button>
-                            </form>
-                        } @else {
-                            <p>No hay ninguna categoría seleccionada para editar.</p>
-                        }
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="closeEditCategoryModal()">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal-backdrop-custom" [class.d-block]="showCreateCourseModal || showEditCourseModal || showEditCategoryModal"></div>
-    }
+<div class="table-container">
+  <h3>Categorías</h3>
+  <table>
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let category of categories()">
+              <td>{{category.id}}</td>
+              <td>{{category.nombre}}</td>
+              <td>{{category.descripcion ? category.descripcion : 'N/A'}}</td>
+              <td>{{category.precio | currency:'MXN':'symbol':'1.2-2':'es'}}</td>
+              <td>
+                  <button (click)="openEditCategoryModal(category)" class="edit-button">Editar</button>
+                  <button (click)="deleteCategory(category.id)" class="delete-button">Eliminar</button>
+              </td>
+          </tr>
+           <tr *ngIf="categories().length === 0 && !loading()">
+              <td colspan="5">No hay categorías registradas.</td>
+          </tr>
+      </tbody>
+  </table>
 </div>
+
+
+
+
+<div class="table-container">
+  <h3>Cursos</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Duración (horas)</th>
+        <th>Hora de Inicio</th>
+        <th>Hora de Término</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses()">
+        <td>{{ course.id }}</td>
+        <td>{{ course.nombre }}</td>
+        <td>{{ course.nombre_categoria }}</td>
+        <td>{{ course.duracion_horas }}</td>
+        <td>{{ course.hora_inicio }}</td>
+        <td>{{ course.hora_termino }}</td>
+        <td>
+          <button (click)="openEditCourseModal(course)" class="edit-button">Editar</button>
+          <button (click)="deleteCourse(course.id)" class="delete-button">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="courses().length === 0 && !loading()">
+        <td colspan="7">No hay cursos registrados.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div *ngIf="showCreateCourseModal()" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeCreateCourseModal()">&times;</span>
+    <h3>Crear Nuevo Curso</h3>
+    <form (ngSubmit)="createCourse()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="newCourse.nombre" required>
+      </div>
+      <div class="form-group">
+          <label for="categoria_id">Categoría:</label>
+          <ng-select [items]="categories()"
+                    bindLabel="nombre"
+                    bindValue="id"
+                    placeholder="Selecciona una categoría"
+                    name="categoria_id"
+                    [(ngModel)]="newCourse.categoria_id"
+                    required>
+          </ng-select>
+      </div>
+      <div class="form-group">
+        <label for="duracion_horas">Duración (horas):</label>
+        <input type="number" id="duracion_horas" name="duracion_horas" [(ngModel)]="newCourse.duracion_horas" required>
+      </div>
+      <div class="form-group">
+        <label for="hora_inicio">Hora de Inicio:</label>
+        <input type="time" id="hora_inicio" name="hora_inicio" [(ngModel)]="newCourse.hora_inicio" required>
+      </div>
+      <div class="form-group">
+        <label for="hora_termino">Hora de Término:</label>
+        <input type="time" id="hora_termino" name="hora_termino" [(ngModel)]="newCourse.hora_termino" required>
+      </div>
+      <button type="submit" class="create-button">Crear Curso</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="showEditCourseModal()" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeEditCourseModal()">&times;</span>
+    <h3>Editar Curso</h3>
+    <form (ngSubmit)="updateCourse()">
+      <div class="form-group">
+        <label for="edit-nombre">Nombre:</label>
+        <input type="text" id="edit-nombre" name="nombre" [(ngModel)]="selectedCourse()!.nombre" required>
+      </div>
+        <div class="form-group">
+            <label for="edit-categoria_id">Categoría:</label>
+            <ng-select [items]="categories()"
+                       bindLabel="nombre"
+                       bindValue="id"
+                       placeholder="Selecciona una categoría"
+                       name="categoria_id"
+                       [(ngModel)]="selectedCourse()!.categoria_id"
+                       required>
+            </ng-select>
+
+        </div>
+      <div class="form-group">
+        <label for="edit-duracion_horas">Duración (horas):</label>
+        <input type="number" id="edit-duracion_horas" name="duracion_horas" [(ngModel)]="selectedCourse()!.duracion_horas" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-hora_inicio">Hora de Inicio:</label>
+        <input type="time" id="edit-hora_inicio" name="hora_inicio" [(ngModel)]="selectedCourse()!.hora_inicio" required>
+      </div>
+      <div class="form-group">
+        <label for="edit-hora_termino">Hora de Término:</label>
+        <input type="time" id="edit-hora_termino" name="hora_termino" [(ngModel)]="selectedCourse()!.hora_termino" required>
+      </div>
+      <button type="submit" class="save-button">Guardar Cambios</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="showCreateCategoryModal()" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeCreateCategoryModal()">&times;</span>
+        <h3>Crear Categoría</h3>
+        <form (ngSubmit)="createCategory()">
+            <div class="form-group">
+                <label for="nombre-categoria">Nombre:</label>
+                <input type="text" id="nombre-categoria" name="nombre" [(ngModel)]="newCategory.nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion-categoria">Descripción:</label>
+                <textarea id="descripcion-categoria" name="descripcion" [(ngModel)]="newCategory.descripcion"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="precio-categoria">Precio:</label>
+                <input type="number" id="precio-categoria" name="precio" [(ngModel)]="newCategory.precio" required>
+            </div>
+            <button type="submit" class="create-button">Crear Categoría</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="showEditCategoryModal()" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeEditCategoryModal()">&times;</span>
+      <h3>Editar Categoría</h3>
+      <form (ngSubmit)="updateCategory()">
+        <div class="form-group">
+          <label for="edit-category-nombre">Nombre:</label>
+          <input type="text" id="edit-category-nombre" name="nombre" [(ngModel)]="selectedCategory()!.nombre" required>
+        </div>
+          <div class="form-group">
+                <label for="descripcion-categoria-edit">Descripción:</label>
+                <textarea id="descripcion-categoria-edit" name="descripcion" [(ngModel)]="selectedCategory()!.descripcion"></textarea>
+            </div>
+        <div class="form-group">
+          <label for="edit-category-precio">Precio:</label>
+          <input type="number" id="edit-category-precio" name="precio" [(ngModel)]="selectedCategory()!.precio" required>
+        </div>
+        <button type="submit" class="save-button">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>

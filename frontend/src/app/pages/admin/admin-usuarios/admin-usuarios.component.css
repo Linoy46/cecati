@@ -1,13 +1,144 @@
-/* Estilos básicos para la tabla y el formulario */
-.container {
-    margin-top: 20px;
+/* admin-usuarios.component.css */
+
+/* Reset some potentially conflicting Bootstrap styles */
+ng-select.my-custom-select .ng-select-container {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  min-height: 38px; /* Or whatever height you want */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Remove any height restrictions from parent elements */
+ng-select.my-custom-select { /* Target the ng-select element itself */
+  display: block; /* Ensure it's a block-level element */
+  width: 100%;    /*  width */
+  height: auto;  /* Remove any fixed height */
+}
+
+/* Style the selected items ("chips") */
+.my-custom-select .ng-value { /* Add .my-custom-select for specificity */
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-right: 4px;
+  margin-bottom: 4px; /* Add margin-bottom */
+  display: inline-flex; /* Use inline-flex */
+  align-items: center;
+}
+
+
+/* Style the "x" close button */
+.my-custom-select .ng-value-icon.right { /* Add .my-custom-select for specificity */
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.my-custom-select .ng-arrow-wrapper {
+  width: 25px; /*  width */
+  color: #333; /*  darker color */
+}
+.my-custom-select .ng-arrow-wrapper .ng-arrow{
+  /*  change the default style */
+  border-color: #333 transparent transparent;
+  border-width: 7px 7px 2.5px;
+}
+/* Style the dropdown panel (optional) */
+.my-custom-select .ng-dropdown-panel { /* Add .my-custom-select for specificity */
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Style the search input inside the dropdown */
+.my-custom-select .ng-dropdown-panel .ng-input input { /* Add .my-custom-select */
+width: 100%;
+box-sizing: border-box;
+padding: 8px;
+border: 1px solid #ced4da;
+border-radius: 4px;
+}
+.my-custom-select .ng-dropdown-panel .ng-input input:focus{
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Style the options */
+.my-custom-select .ng-option { /* Add .my-custom-select for specificity */
+padding: 8px 12px;
+cursor: pointer;
+ white-space: nowrap;
+}
+
+.my-custom-select .ng-option:hover, .my-custom-select .ng-option.ng-option-marked { /* Add .my-custom-select */
+background-color: #f8f9fa;
+}
+
+.my-custom-select .ng-option.ng-option-selected, .my-custom-select .ng-option.ng-option-selected.ng-option-marked { /* Add .my-custom-select */
+background-color: #007bff;
+color: white;
+}
+.my-custom-select .ng-value-container{
+       display: flex;
+       align-items: center;
+       flex-wrap: wrap;
+       gap: 4px;
+       padding: 2px;
   }
-  
-  .table {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
+.my-custom-select .ng-dropdown-panel .ng-input input {
+width: 100%;
+box-sizing: border-box;
+padding: 8px;
+border: 1px solid #ced4da;
+ border-radius: 4px;
+/*  more styles */
+}
+.my-custom-select .ng-option-label{
+      width: 100%;
+}
+
+/* --- Styles for the expandable courses list --- */
+
+.cursos-row {
+background-color: #f8f9fa; /* Light gray background for the expanded row */
+}
+
+.cursos-list {
+padding: 10px;
+}
+
+.cursos-list ul {
+list-style: none; /* Remove bullet points */
+padding: 0;
+margin: 0;
+}
+
+.cursos-list li {
+padding: 5px 0;
+border-bottom: 1px solid #dee2e6; /* Add a light border between items */
+}
+
+.cursos-list li:last-child {
+border-bottom: none; /* Remove border from the last item */
+}
+
+/* Style the modal backdrop (optional, for better visual separation) */
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  opacity: 0.5;
+  display: none; /*  hidden by default*/
+}
+.modal-backdrop-custom.d-block {
+display: block;
+}

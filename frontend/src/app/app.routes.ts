@@ -8,14 +8,13 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './app/layouts/main-layout/main-layout.component';
 import { AuthenticatedLayoutComponent } from './app/layouts/authenticated-layout/authenticated-layout.component';
-import { CalificacionesComponent } from './pages/calificaciones/calificaciones.component';
+import { CalificacionesComponent } from './pages/calificaciones/calificaciones.component'; //  user component
 import { CursosComponent } from './pages/cursos/cursos.component';
 import { ActividadComponent } from './pages/actividad/actividad.component';
 import { OrganigramaComponent } from './pages/organigrama/organigrama.component';
-import { AdminLayoutComponent } from './app/layouts/admin-layout/admin-layout.component'; 
+import { AdminLayoutComponent } from './app/layouts/admin-layout/admin-layout.component';
 
-// Importa tus componentes de administrador aquí
-import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminCalificacionesComponent } from './pages/admin/admin-calificaciones/admin-calificaciones.component';
 import { AdminUsuariosComponent } from './pages/admin/admin-usuarios/admin-usuarios.component';
 import { AdminContenidoComponent } from './pages/admin/admin-contenido/admin-contenido.component';
 
@@ -37,9 +36,9 @@ export const routes: Routes = [
     {
         path: '',
         component: AuthenticatedLayoutComponent, // Layout para rutas autenticadas
-        canActivate: [AuthGuard],             // Protege TODAS las rutas hijas
+        canActivate: [AuthGuard],                // Protege TODAS las rutas hijas
         children: [
-            { path: 'calificaciones', component: CalificacionesComponent },
+            { path: 'user/calificaciones', component: CalificacionesComponent },  //  user route
             { path: 'cursos', component: CursosComponent },
             { path: 'actividad', component: ActividadComponent },
         ]
@@ -49,16 +48,17 @@ export const routes: Routes = [
     {
         path: 'admin',
         component: AdminLayoutComponent,
-        canActivate: [AuthGuard], // Protege las rutas de administrador
+        canActivate: [AuthGuard], // Protect admin routes
+        data: { expectedRole: 'adm' }, //  expected role
         children: [
-            { path: 'dashboard', component: AdminDashboardComponent },
-            { path: 'usuarios', component: AdminUsuariosComponent },
-            { path: 'contenido', component: AdminContenidoComponent }
+            { path: 'dashboard', component: AdminCalificacionesComponent }, //  admin route
+            { path: 'usuarios', component: AdminUsuariosComponent },        //  admin route
+            { path: 'contenido', component: AdminContenidoComponent }         //  admin route
             // ... más rutas de administrador
         ]
     },
 
     { path: 'registro', component: RegistroComponent },
     { path: 'login', component: LoginComponent },
-    { path: '**', redirectTo: 'inicio' }
+    { path: '**', redirectTo: 'inicio' } // Wildcard route for a 404 page, redirects to home
 ];

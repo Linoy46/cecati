@@ -1,58 +1,29 @@
-<div class="accordion">
+<h2>Nuestras especialidades</h2>
 
-  @if (loading()) {
-    <div class="d-flex justify-content-center">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Cargando...</span>
-      </div>
-    </div>
-  } @else if (error()) {
-    <div class="alert alert-danger" role="alert">
-      {{ error() }}
-    </div>
-  } @else {
-    @for (category of displayedCategories(); track category.id) {
-      <div class="accordion-item">
-        <button class="accordion-button" (click)="toggleAccordion(category.id)">
-          <span>{{ category.nombre }}</span>
-          <span class="icon" [class.expanded]="isExpanded(category.id)">▼</span>
-        </button>
+<div *ngIf="loading()">Cargando...</div>
+<div *ngIf="error()">{{ error() }}</div>
 
-        <div class="accordion-content" *ngIf="isExpanded(category.id)">
-          <p *ngIf="category.descripcion">
-            <strong>Descripción:</strong> {{ category.descripcion }}
-          </p>
-          <p>
-            <strong>Precio:</strong> {{ category.precio | currency:'USD':'symbol':'1.2-2' }}
-          </p>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Curso</th>
-                  <th>Duración (horas)</th>
-                  <th>Hora inicio</th>
-                  <th>Hora término</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (course of category.cursos; track course.id) {
-                  <tr>
-                    <td>{{ course.nombre }}</td>
-                    <td>{{ course.duracion_horas }}</td>
-                    <td>{{ course.hora_inicio }}</td>
-                    <td>{{ course.hora_termino }}</td>
-                  </tr>
-                } @empty {
-                  <tr>
-                    <td colspan="4">No hay cursos disponibles para esta categoría.</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
+<div class="accordion" *ngIf="!loading() && !error()">
+  <div class="accordion-item" *ngFor="let category of categories()">
+    <div class="category-header" (click)="toggleAccordion(category.id)" [class.expanded]="isExpanded(category.id)">
+      {{ category.nombre }}
+      <span class="icon" [class.expanded]="isExpanded(category.id)">&gt;</span>
+    </div>
+    <div class="accordion-content" *ngIf="isExpanded(category.id)">
+
+      <div class="category-info">
+        <p *ngIf="category.descripcion" class="description">{{ category.descripcion }}</p>
+        <p class="price">Precio: {{ category.precio | currency:'MXN':'symbol':'1.2-2':'es' }}</p>
       </div>
-    }
-  }
+
+      <ul class="course-list">
+        <li *ngFor="let course of getCoursesByCategory(category.id)">
+          {{ course.nombre }}
+        </li>
+        <li *ngIf="getCoursesByCategory(category.id).length === 0">
+          No hay cursos disponibles para esta categoría.
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

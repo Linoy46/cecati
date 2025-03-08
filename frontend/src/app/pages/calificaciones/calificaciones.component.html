@@ -1,35 +1,32 @@
-<div class="container">
-    <div class="header">
-      <div class="logo">calificaciones</div>
-      <div class="user-icon"></div>
-    </div>
-  
-    <div class="student-info">
-      <div class="avatar"></div>
-      <div class="info">
-        <div class="name">{{ alumno.nombre }}</div>
-        <div class="matricula">{{ alumno.matricula }}</div>
-      </div>
-    </div>
-  
-    <table class="grades-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Profesor</th>
-          <th>Materia</th>
-     
-          <th>Final</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let calificacion of calificaciones; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ calificacion.profesor }}</td>
-          <td>{{ calificacion.materia }}</td>
+<h2>Mis Calificaciones</h2>
 
-          <td>{{ calificacion.final }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div *ngIf="loading()">
+  <p>Cargando calificaciones...</p>
+</div>
+
+<div *ngIf="error()" class="error-message">
+  <p>{{ error() }}</p>
+</div>
+
+<div *ngIf="!loading() && !error() && calificacionesToShow().length > 0">
+  <table>
+    <thead>
+      <tr>
+        <th>Curso</th>
+        <th>Categoría</th>
+        <th>Calificación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let calificacion of calificacionesToShow()">
+        <td>{{ calificacion.nombre_curso }}</td>
+        <td>{{ calificacion.nombre_categoria}}</td>
+        <td>{{ calificacion.calificacion }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="!loading() && !error() && calificacionesToShow().length === 0">
+  <p>No tienes calificaciones registradas.</p>
+</div>

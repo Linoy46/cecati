@@ -1,0 +1,118 @@
+<h2>Administrar Calificaciones</h2>
+
+<button (click)="openCreateModal()">Crear Nueva Calificación</button>
+
+<div *ngIf="loading()">Cargando...</div>
+<div *ngIf="error()" class="error-message">{{ error() }}</div>
+
+<div *ngIf="!loading() && !error()">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Curso</th>
+                <th>Calificación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let calificacion of calificacionesToShow()">
+                <td>{{ calificacion.id }}</td>
+                <td>{{ calificacion.nombre_usuario }}</td>
+                <td>{{ calificacion.nombre_curso }}</td>
+                <td>{{ calificacion.calificacion }}</td>
+                <td>
+                    <button (click)="openEditModal(calificacion)" class="edit-button">Editar</button>
+                    <button (click)="deleteCalificacion(calificacion.id)" class="delete-button">Eliminar</button>
+                </td>
+            </tr>
+             <tr *ngIf="calificacionesToShow().length === 0 && !loading()">
+                <td colspan="5">No hay calificaciones registradas.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="showCreateModal()" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeCreateModal()">&times;</span>
+        <h3>Crear Nueva Calificación</h3>
+        <form [formGroup]="calificacionForm" (ngSubmit)="createCalificacion()">
+            <div class="form-group">
+                <label for="usuario_id">Usuario:</label>
+                <ng-select [items]="usuarios()" bindLabel="nombre" bindValue="id" formControlName="usuario_id" placeholder="Selecciona un usuario" required>
+                </ng-select>
+                <div *ngIf="calificacionForm.get('usuario_id')?.invalid && calificacionForm.get('usuario_id')?.touched" class="error-message">
+                    El usuario es requerido.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="curso_id">Curso:</label>
+                <ng-select [items]="cursos()" bindLabel="nombre" bindValue="id" formControlName="curso_id" placeholder="Selecciona un curso" required>
+                </ng-select>
+                <div *ngIf="calificacionForm.get('curso_id')?.invalid && calificacionForm.get('curso_id')?.touched" class="error-message">
+                    El curso es requerido.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="calificacion">Calificación:</label>
+                <input type="number" id="calificacion" formControlName="calificacion" required min="0" max="10" step="0.1">
+                 <div *ngIf="calificacionForm.get('calificacion')?.invalid && calificacionForm.get('calificacion')?.touched" class="error-message">
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('required')">La calificación es requerida.</div>
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('min')">La calificación mínima es 0.</div>
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('max')">La calificación máxima es 10.</div>
+                </div>
+            </div>
+            <button type="submit" class="create-button" [disabled]="calificacionForm.invalid">Crear Calificación</button>
+        </form>
+    </div>
+</div>
+
+<div *ngIf="showEditModal()" class="modal">
+    <div class="modal-content">
+        <span class="close" (click)="closeEditModal()">&times;</span>
+        <h3>Editar Calificación</h3>
+        <form [formGroup]="calificacionForm" (ngSubmit)="updateCalificacion()">
+            <div class="form-group">
+                <label for="edit-usuario_id">Usuario:</label>
+                <ng-select [items]="usuarios()"
+                           bindLabel="nombre"
+                           bindValue="id"
+                           formControlName="usuario_id"
+                           placeholder="Selecciona un usuario"
+                           required>
+                </ng-select>
+                 <div *ngIf="calificacionForm.get('usuario_id')?.invalid && calificacionForm.get('usuario_id')?.touched" class="error-message">
+                    El usuario es requerido.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-curso_id">Curso:</label>
+                <ng-select [items]="cursos()"
+                           bindLabel="nombre"
+                           bindValue="id"
+                           formControlName="curso_id"
+                           placeholder="Selecciona un curso"
+                           required>
+                </ng-select>
+                <div *ngIf="calificacionForm.get('curso_id')?.invalid && calificacionForm.get('curso_id')?.touched" class="error-message">
+                    El curso es requerido.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-calificacion">Calificación:</label>
+                <input type="number" id="edit-calificacion" formControlName="calificacion" required min="0" max="10" step="0.1">
+                <div *ngIf="calificacionForm.get('calificacion')?.invalid && calificacionForm.get('calificacion')?.touched" class="error-message">
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('required')">La calificación es requerida.</div>
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('min')">La calificación mínima es 0.</div>
+                    <div *ngIf="calificacionForm.get('calificacion')?.hasError('max')">La calificación máxima es 10.</div>
+                </div>
+            </div>
+            <button type="submit" class="save-button" [disabled]="calificacionForm.invalid">Guardar Cambios</button>
+        </form>
+    </div>
+</div>

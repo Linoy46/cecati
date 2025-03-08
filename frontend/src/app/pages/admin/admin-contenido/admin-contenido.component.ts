@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe, registerLocaleData } from '@angular/common';
-import { CursoService } from '../../../services/curso.service'; //  ruta
+import { CursoService } from '../../../services/curso.service';
 import { Category } from '../../../interfaces/category.interface';
 import { Course } from '../../../interfaces/course.interface';
 import { FormsModule } from '@angular/forms';
 import localeEs from '@angular/common/locales/es';
+import { forkJoin } from 'rxjs';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { HttpErrorResponse } from '@angular/common/http';
 
 registerLocaleData(localeEs, 'es');
 
@@ -13,184 +16,222 @@ registerLocaleData(localeEs, 'es');
   templateUrl: './admin-contenido.component.html',
   styleUrls: ['./admin-contenido.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, CurrencyPipe],
+  imports: [CommonModule, FormsModule, CurrencyPipe, NgSelectModule],
 })
 export class AdminContenidoComponent implements OnInit {
-  categories: Category[] = [];
-  loading: boolean = true;
-  error: string | null = null;
-  showCreateCourseModal = false;
-  showEditCourseModal = false;
-    showEditCategoryModal = false; //Modal para categoria
-  newCourse: Course = this.getEmptyCourse();
-  selectedCourse: Course | null = null;
-    selectedCategory: Category | null = null; //Categoria seleccionada
+  categories = signal<Category[]>([]);
+  courses = signal<Course[]>([]);
+  loading = signal(true);
+  error = signal<string | null>(null);
+  showCreateCourseModal = signal(false);
+  showEditCourseModal = signal(false);
+  showEditCategoryModal = signal(false);
+  showCreateCategoryModal = signal(false);
+  selectedCourse = signal<Course | null>(null);
+  selectedCategory = signal<Category | null>(null);
 
-  constructor(private cursoService: CursoService) { }
+  newCourse: Course = {
+    id: 0,
+    nombre: '',
+    categoria_id: 0,
+    duracion_horas: 0,
+    hora_inicio: '',
+    hora_termino: '',
+  };
+
+  newCategory: Category = {
+    id: 0,
+    nombre: '',
+    precio: 0,
+    descripcion: '', // Initialize description
+  };
+
+  constructor(private cursoService: CursoService) {}
 
   ngOnInit(): void {
-    this.loadCourses();
+    this.loadData();
+  }
+
+  loadData() {
+    this.loading.set(true);
+    this.error.set(null);
+
+    forkJoin({
+      courses: this.cursoService.getAllCourses(),
+      categories: this.cursoService.getAllCategorias(),
+    }).subscribe({
+      next: ({ courses, categories }) => {
+        const categoryLookup: { [key: number]: string } = {};
+        categories.forEach((cat) => (categoryLookup[cat.id] = cat.nombre));
+
+        const coursesWithCategoryNames = courses.map((course) => ({
+          ...course,
+          nombre_categoria: categoryLookup[course.categoria_id] || 'Sin categoría',
+        }));
+
+        this.courses.set(coursesWithCategoryNames);
+        this.categories.set(categories);
+        this.loading.set(false);
+      },
+      error: (err: HttpErrorResponse) => {
+        this.error.set(this.cursoService.getErrorMessage(err)); // Use centralized error handling
+        this.loading.set(false);
+      },
+    });
   }
 
     // --- Cursos ---
-  loadCourses() {
-    this.loading = true;
-    this.error = null;
-    this.cursoService.getCourses().subscribe({
-      next: (data: Category[]) => {
-        this.categories = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = err.message || 'Error al cargar los cursos.';
-        this.loading = false;
-      }
-    });
-  }
-
-    getEmptyCourse(): Course {
-        return {
-          id: 0,
-          nombre: '',
-          duracion_horas: 0,
-          hora_inicio: '',
-          hora_termino: '',
-          categoriaId: 0
+    openCreateCourseModal() {
+        this.newCourse = {
+            id: 0,
+            nombre: '',
+            categoria_id: 0,
+            duracion_horas: 0,
+            hora_inicio: '',
+            hora_termino: ''
         };
+        this.error.set(null); // Clear error message
+        this.showCreateCourseModal.set(true);
     }
-  openCreateCourseModal() {
-    this.newCourse = this.getEmptyCourse();
-    this.showCreateCourseModal = true;
-  }
 
   closeCreateCourseModal() {
-    this.showCreateCourseModal = false;
+    this.showCreateCourseModal.set(false);
   }
 
   openEditCourseModal(course: Course) {
-    this.selectedCourse = { ...course };  // Copia
-    this.showEditCourseModal = true;
+    this.selectedCourse.set({ ...course });
+    this.showEditCourseModal.set(true);
   }
 
   closeEditCourseModal() {
-    this.selectedCourse = null;
-    this.showEditCourseModal = false;
+    this.selectedCourse.set(null);
+    this.showEditCourseModal.set(false);
   }
 
-  createCourse() {
-    if (!this.newCourse.nombre || !this.newCourse.duracion_horas || !this.newCourse.hora_inicio || !this.newCourse.hora_termino || !this.newCourse.categoriaId) {
-      alert('Por favor, complete todos los campos del curso.');
-      return;
-    }
+    createCourse() {
+        if (!this.newCourse.nombre || !this.newCourse.duracion_horas || !this.newCourse.categoria_id ||
+            !this.newCourse.hora_inicio || !this.newCourse.hora_termino) {
+            alert('Por favor, complete todos los campos del curso.');
+            return; // Stop execution if validation fails
+        }
 
-    this.cursoService.createCourse(this.newCourse).subscribe({
-      next: () => {
-        this.loadCourses();
-        this.closeCreateCourseModal();
-      },
-      error: (err) => {
-        this.error = err.message || 'Error al crear el curso.';
-      }
-    });
-  }
-
-  updateCourse() {
-    if (!this.selectedCourse?.nombre || !this.selectedCourse.duracion_horas || !this.selectedCourse.hora_inicio || !this.selectedCourse.hora_termino || !this.selectedCourse.categoriaId) {
-      alert('Por favor, complete todos los campos del curso.');
-      return;
-    }
-
-    if (this.selectedCourse) {
-        this.cursoService.updateCourse(this.selectedCourse).subscribe({
-          next: () => {
-            this.loadCourses();
-            this.closeEditCourseModal();
-          },
-          error: (err) => {
-            this.error = err.message || 'Error al actualizar el curso.';
-          }
+        this.cursoService.createCourse(this.newCourse).subscribe({
+            next: () => {
+                this.loadData();
+                this.closeCreateCourseModal();
+            },
+            error: (err: HttpErrorResponse) => { // Use HttpErrorResponse
+                this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+            }
         });
     }
-  }
 
-  deleteCourse(id: number) {
-    if (confirm('¿Está seguro de que desea eliminar este curso?')) {
-      this.cursoService.deleteCourse(id).subscribe({
-        next: () => {
-          this.loadCourses();
-        },
-        error: (err) => {
-          this.error = err.message || 'Error al eliminar el curso.';
+    updateCourse() {
+        if (!this.selectedCourse()?.nombre || !this.selectedCourse()?.duracion_horas
+            || !this.selectedCourse()?.hora_inicio || !this.selectedCourse()?.hora_termino
+            || !this.selectedCourse()?.categoria_id) {
+            alert('Por favor, complete todos los campos del curso.');
+
+            return;  // Stop execution if validation fails
         }
-      });
+
+        if (this.selectedCourse()) {
+            this.cursoService.updateCourse(this.selectedCourse()!).subscribe({
+                next: () => {
+                    this.loadData();
+                    this.closeEditCourseModal();
+                },
+                error: (err: HttpErrorResponse) => { // Use HttpErrorResponse
+                    this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+                }
+            });
+        }
     }
-  }
+
+    deleteCourse(id: number) {
+        if (confirm('¿Está seguro de que desea eliminar este curso?')) {
+            this.cursoService.deleteCourse(id).subscribe({
+                next: () => {
+                    this.loadData();
+                },
+                error: (err: HttpErrorResponse) => { // Use HttpErrorResponse
+                    this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+                }
+            });
+        }
+    }
 
     // --- Categorías ---
-
-    openEditCategoryModal(category: Category) {
-        this.selectedCategory = { ...category }; //  copia
-        this.showEditCategoryModal = true;
+    openCreateCategoryModal() {
+        this.newCategory = {
+            id: 0,
+            nombre: '',
+            precio: 0,
+            descripcion: ''
+        };
+        this.error.set(null); // Clear error message
+        this.showCreateCategoryModal.set(true);
     }
 
-    closeEditCategoryModal() {
-        this.selectedCategory = null;
-        this.showEditCategoryModal = false;
-    }
-    updateCategory() {
-    if (!this.selectedCategory?.nombre || !this.selectedCategory.precio) {
+  closeCreateCategoryModal() {
+    this.showCreateCategoryModal.set(false);
+  }
+
+  openEditCategoryModal(category: Category) {
+    this.selectedCategory.set({ ...category });
+    this.showEditCategoryModal.set(true);
+  }
+
+  closeEditCategoryModal() {
+    this.selectedCategory.set(null);
+    this.showEditCategoryModal.set(false);
+  }
+
+  updateCategory() {
+    if (!this.selectedCategory()?.nombre || !this.selectedCategory()?.precio) {
       alert('Por favor, complete el nombre y el precio de la categoría.');
       return;
     }
-
-    if (this.selectedCategory) {
-      this.cursoService.updateCategory(this.selectedCategory).subscribe({
+    if (this.selectedCategory()) {
+      this.cursoService.updateCategory(this.selectedCategory()!).subscribe({
         next: () => {
-          this.loadCourses();  // Recarga *todo* (cursos y categorías)
+          this.loadData();
           this.closeEditCategoryModal();
         },
-        error: (err) => {
-          this.error = err.message || 'Error al actualizar la categoría.';
-        }
+        error: (err: HttpErrorResponse) => {
+          this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+        },
       });
     }
   }
-    createCategory() {
-        //Se crea una variable de tipo Category
-      let newCategory : Category = {id: 0, nombre:"", precio: 0}
 
-    if (!newCategory.nombre) {
-      alert('Por favor ingrese un nombre para la categoría.');
-      return;
-    }
-     if (!newCategory.precio) {
-      alert('Por favor ingrese el precio de la categoría.');
+  createCategory() {
+    if (!this.newCategory.nombre || !this.newCategory.precio) {
+      alert('Por favor ingrese un nombre y precio para la categoría.');
       return;
     }
 
-    //Se crea la categoria
-    this.cursoService.createCategory(newCategory).subscribe({
+    this.cursoService.createCategory(this.newCategory).subscribe({
       next: () => {
-        this.loadCourses();  // Recarga *todo* (cursos y categorías)
-        this.closeEditCategoryModal();
+        this.loadData();
+        this.closeCreateCategoryModal();
+        this.newCategory = { id: 0, nombre: '', precio: 0, descripcion: '' }; // Clear form
       },
-      error: (err) => {
-        this.error = err.message || 'Error al crear la categoría.';
-      }
+      error: (err: HttpErrorResponse) => {
+        this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+      },
     });
-
   }
-
-    deleteCategory(categoryId: number){
-         if (confirm('¿Está seguro de que desea eliminar esta categoría? Esto también eliminará todos los cursos asociados.')) {
-            this.cursoService.deleteCategory(categoryId).subscribe({
-                next: () => {
-                    this.loadCourses(); //Recarga
-                },
-                error: (err) => {
-                    this.error = err.message || 'Error al eliminar la categoría';
-                }
-            })
-         }
+  deleteCategory(categoryId: number) {
+    if (confirm('¿Está seguro de que desea eliminar esta categoría? Esto también eliminará todos los cursos asociados.')) {
+      this.cursoService.deleteCategory(categoryId).subscribe({
+        next: () => {
+          this.loadData();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.error.set(this.cursoService.getErrorMessage(err)); // Centralized error handling
+        },
+      });
     }
+  }
 }

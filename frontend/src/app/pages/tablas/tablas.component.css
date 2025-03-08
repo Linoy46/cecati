@@ -1,91 +1,112 @@
-/* En tablas.component.css */
+/* tablas.component.css */
 
 .accordion {
-  width: 90%; /* Controla el ancho general. Puedes usar px, %, vw, etc. */
-  max-width: 1200px; /* Ancho máximo para pantallas grandes */
-  margin: 20px auto;  /* Centra el acordeón horizontalmente y añade margen */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra sutil */
-  border-radius: 8px; /* Bordes redondeados */
-  overflow: hidden; /* Para que los bordes redondeados funcionen bien con el contenido */
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 8px; /* Add border-radius here */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
 }
 
 .accordion-item {
-  border-bottom: 1px solid #ddd; /* Línea separadora más sutil */
-  /* Quitamos el borde y el margen inferior del .accordion-item, ya que ahora tenemos .accordion */
+  border: none; /* Remove borders, handle with header/content */
+  margin-bottom: 5px; /* Space between items */
 }
 
-.accordion-item:last-child {
-    border-bottom: none; /* Quita el borde del último elemento */
-}
-
-.accordion-button {
-  width: 100%;
-  background: #580420;
+.category-header {
+  background-color: #580420;
   color: white;
-  padding: 15px 20px; /* Más espacioso */
-  border: none;
-  text-align: left;
+  padding: 15px 20px;
   cursor: pointer;
-  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.3s ease; /* Transición suave al hacer hover */
-  font-size: 1.1em; /* Texto un poco más grande */
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: none;          /* No borders on the header itself */
+  border-radius: 5px;    /* Rounded corners for header */
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
 }
 
-.accordion-button:hover {
-    background-color: #7a052b; /* Un tono más oscuro al hacer hover */
+
+.category-header:hover {
+  background-color: #7a052b;
 }
 
-.accordion-button .icon {
+.category-header .icon {
   transition: transform 0.3s ease;
-  font-size: 1.2em; /* Icono un poco más grande*/
+  font-size: 1.2em;
+    margin-left: auto;
 }
 
-.accordion-button .icon.expanded {
+.category-header .icon.expanded {
   transform: rotate(180deg);
 }
 
 .accordion-content {
-  background: #f8f9fa;
-  padding: 20px; /* Más espacioso */
-  /*border-top: 1px solid #ddd;  Separador entre botón y contenido (opcional) */
+  padding: 20px;          /* Add padding to the content */
+  background-color: #f8f9fa; /* Light gray background */
+  border-top: none;
+  border-bottom: 1px solid #ddd;/* Subtle border on the bottom */
+  border-radius: 5px;         /* Rounded corners */
+
+}
+.accordion-item:first-child .category-header{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
-.table-container {
-  overflow-x: auto; /* Scroll horizontal si la tabla es muy ancha */
-  border-radius: 4px; /* Bordes redondeados para el contenedor */
-  overflow: hidden;   /* Para que el border-radius se aplique correctamente */
+.course-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0; /* Add top margin */
+
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  /*  border: none;  Si quieres quitar *todos* los bordes de la tabla */
+.course-list li {
+  padding: 10px 0;      /* Vertical padding */
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;   /* Consistent background */
+  transition: background-color 0.3s ease; /* Add transition */
+
 }
 
-th, td {
-  padding: 12px 15px; /* Más espacioso */
-  text-align: left;
-  border-bottom: 1px solid #ddd; /* Línea separadora solo en la parte inferior */
+.course-list li:last-child {
+  border-bottom: none;
 }
 
-th {
-  background: #690415;
-  color: white;
-  font-weight: bold; /* Encabezados más prominentes */
+.course-list li:hover {
+    background-color: #e9ecef; /* Lighter gray on hover */
 }
 
-tr:nth-child(even) { /* Filas pares con fondo ligeramente diferente (opcional) */
-    background-color: #f2f2f2;
-}
-tr:hover{
-    background-color: #ddd;
+h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
 }
 
-.accordion-item p { /* Estilo para la descripción */
+.category-info {
+  /*  Estilos para el contenedor de descripción y precio */
+  margin-bottom: 15px;  /* Espacio debajo de la descripción/precio */
+  border-bottom: 1px solid #ddd; /* Add a separator line */
+  padding-bottom: 15px; /* Add padding below the separator */
+}
+
+.description {
   margin-bottom: 0.5em;
   color: #666;
-  font-style: italic; /* Descripción en cursiva (opcional) */
+  font-style: italic;
+}
+
+.price {
+  font-weight: bold;
+  color: #580420;  /* Usa el mismo color que el encabezado */
+  font-size: 1.1em;  /* Opcional: hazlo un poco más grande */
 }
