@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-inicio',
     standalone: true,
-    imports: [CommonModule], // Add CommonModule to the imports array
+    imports: [CommonModule],
     templateUrl: './inicio.component.html',
-    styleUrls: ['./inicio.component.css']  // Corrected styleUrl to styleUrls (plural)
+    styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent {
     galleries: { [key: number]: string[] } = {
@@ -34,23 +34,19 @@ export class InicioComponent {
     }
 
     closeGallery(event: MouseEvent): void {
-      // Only close if the click target is the gallery container itself OR the close area
         if (event.target instanceof Element &&
             (event.target.id === 'gallery' || event.target.classList.contains('close-area'))) {
             this.isGalleryOpen = false;
         }
     }
 
-
     openLightbox(src: string, event: MouseEvent): void {
-        event.stopPropagation(); // Prevent gallery from closing
+        event.stopPropagation();
         this.lightboxImageSrc = src;
         this.isLightboxOpen = true;
     }
 
-
-      closeLightbox(event: MouseEvent): void {
-        // Check if the click target is the lightbox container itself OR the close area
+    closeLightbox(event: MouseEvent): void {
         if (event.target instanceof Element &&
             (event.target.id === 'lightbox' || event.target.classList.contains('close-area'))) {
             this.isLightboxOpen = false;

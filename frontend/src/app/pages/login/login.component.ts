@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService, AuthResponse } from '../../services/auth.service'; // Import AuthResponse
+import { AuthService, AuthResponse } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule], // Add CommonModule if using *ngIf
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -28,10 +28,9 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-        //  mark all fields as touched to display validation messages
-        Object.values(this.loginForm.controls).forEach(control => {
-            control.markAsTouched();
-        });
+      Object.values(this.loginForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
       this.errorMessage = 'Por favor, completa todos los campos correctamente.';
       return;
     }
@@ -39,35 +38,29 @@ export class LoginComponent {
     const { correo, contrasena } = this.loginForm.value;
 
     this.authService.login(correo, contrasena).subscribe({
-      next: (response: AuthResponse) => { // Use the AuthResponse type
-        // console.log('Respuesta del backend:', response); //  for debugging
-
-        if (response.sesion_activa === true) { //  check for sesion_activa
+      next: (response: AuthResponse) => {
+        if (response.sesion_activa === true) {
           this.errorMessage = '';
-
-          // Store user info.  VERY IMPORTANT!
           this.authService.setCurrentUser(response);
 
-          // Redirect based on role
           if (response.rol === 'adm') {
-            this.router.navigate(['/admin/dashboard']); // Redirect to admin
+            this.router.navigate(['/admin/usuarios']);
           } else {
-            this.router.navigate(['/user/calificaciones']); // Redirect to user
+            this.router.navigate(['/user/calificaciones']);
           }
         } else {
-          // Handle login failure (show message from server, if available)
           this.errorMessage = response.error || 'Error desconocido al iniciar sesión';
         }
       },
-      error: (error) => {  // Improved error handling
+      error: (error) => {
         console.error('Error en el login:', error);
-        this.errorMessage = 'Correo o contraseña incorrectos'; // Default error
+        this.errorMessage = 'Correo o contraseña incorrectos';
         if (error.status === 0) {
-            this.errorMessage = "No se pudo conectar con el servidor."; // No connection
+          this.errorMessage = "No se pudo conectar con el servidor.";
         } else if (error.status === 401) {
-          this.errorMessage = "Credenciales inválidas."; // Unauthorized
+          this.errorMessage = "Credenciales inválidas.";
         } else if (error.error && error.error.error) {
-            this.errorMessage = error.error.error; //  custom error message
+          this.errorMessage = error.error.error;
         }
       }
     });

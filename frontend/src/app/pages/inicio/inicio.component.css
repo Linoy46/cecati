@@ -274,7 +274,7 @@ p {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: 1rem; /* Space above */
+  margin-top: 1rem; 
 }
 
 .conocer-logo .clave,
@@ -288,14 +288,12 @@ p {
   width: auto;
 }
 
-/* Image container within logo area */
 .conocer-logo-image {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Style for the logo container */
 .conocer-logo {
   flex: 0 0 250px;
   text-align: center;
@@ -305,7 +303,6 @@ p {
   align-items: center;
 }
 
-/* Styles for ALL info-requisitos sections (including EC0454, EC0105) */
 #conocer .info-requisitos {
   max-width: none;
   margin-top: 1rem;
@@ -324,79 +321,69 @@ p {
   margin-bottom: 0.7rem;
 }
 
-/* Style for the standards */
 #conocer .estandar {
   margin-top: 1.5rem;
 }
 
-
-/*--------------------------------------------------------------
-# Calendario Escolar
---------------------------------------------------------------*/
 #Calendario {
-    padding: 2rem 0; /* Reduced padding */
-    text-align: center; /* Center the content */
+  padding: 2rem 0; 
+  text-align: center; 
 }
 
 #Calendario .calendario {
-  display: inline-block; /* Important for centering the image */
-  width: 70%; /* Set the width to 70% */
-  max-width: 800px; /* Add a max-width for larger screens */
-  margin: 0 auto; /* Center horizontally */
+  display: inline-block;
+  width: 70%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-
 #Calendario img {
-    max-width: 100%; /* Make the image responsive within its container */
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: block;  /*  For margin: auto to work */
-    margin: 0 auto; /* Center the image */
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: block;
+  margin: 0 auto;
 }
 #Calendario .subtitulo p{
    margin: auto;
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
-
-/* Medium screens (tablets) */
 @media (max-width: 768px) {
-    #conocer .contenedor-conocer {
-        flex-direction: column;
-        align-items: center;
-    }
+  #conocer .contenedor-conocer {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    #conocer .infoconocer,
-    #conocer .mision-conocenos {
-        text-align: center;
-        width: 90%;
-        max-width: none;
-    }
-    #conocer .contenedor-conocer img {
-      width: 50%;
-      max-width: 250px;
-      height: auto;
-    }
+  #conocer .infoconocer,
+  #conocer .mision-conocenos {
+    text-align: center;
+    width: 90%;
+    max-width: none;
+  }
+  #conocer .contenedor-conocer img {
+    width: 50%;
+    max-width: 250px;
+    height: auto;
+  }
 
-    .conocer-logo .clave,
-    .conocer-logo .te-certifica {
-        text-align: center;
-        width: 100%;
-    }
-      #Calendario .calendario {
-        width: 90%; /* Wider on smaller screens */
-    }
+  .conocer-logo .clave,
+  .conocer-logo .te-certifica {
+    text-align: center;
+    width: 100%;
+  }
+    #Calendario .calendario {
+    width: 90%;
+  }
 }
 
-/* Small screens (phones) */
 @media (max-width: 480px) {
   #conocer .contenedor-conocer img {
-        width: 85%;
-        max-width: 250px;
-        height: auto;
+    width: 85%;
+    max-width: 250px;
+    height: auto;
    }
-    #conocer .info-requisitos p {
-        font-size: 0.9rem;
-    }
+  #conocer .info-requisitos p {
+    font-size: 0.9rem;
+  }
 }

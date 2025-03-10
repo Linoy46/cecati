@@ -3,18 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 :root {
     scroll-behavior: smooth;
 }
-
 body {
     margin: 0;
     line-height: 1.5;
     color: #52565b;
     font-family: 'Montserrat', sans-serif;
 }
-
 .top-nav {
     background-color: #611232;
     padding: 10px 15px;
@@ -22,26 +19,22 @@ body {
     align-items: center;
     justify-content: space-between;
 }
-
 .logo_esc {
     width: auto;
     height: 50px;
     display: inline-block;
     padding: 2px;
 }
-
 .logo_ceca {
     width: auto;
     height: 50px;
     display: inline-block;
     padding: 2px;
 }
-
 .logo-container {
    display: flex;
    align-items: center;
 }
-
 .header {
     font-family: 'Montserrat', sans-serif;
     background-color: #a48138;

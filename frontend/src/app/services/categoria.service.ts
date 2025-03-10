@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CursoService {
+export class CategoriaService {
   private apiUrl = 'http://localhost/cecati-login/frontend/php.api/controllers/usuarios.php'; // Ajusta la URL de tu API
 
   constructor(private http: HttpClient) { }
 
-  obtenerCursos(): Observable<any[]> {
+  obtenerCategorias(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 

@@ -1,0 +1,69 @@
+<h2>Usuarios</h2>
+
+<div>
+  <h3>Crear Nuevo Usuario</h3>
+  <input type="text" placeholder="Nombre" [(ngModel)]="nuevoUsuario.nombre">
+  <input type="email" placeholder="Correo" [(ngModel)]="nuevoUsuario.correo">
+  <input type="text" placeholder="Rol" [(ngModel)]="nuevoUsuario.rol">
+  <button (click)="crearUsuario()">Crear</button>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.correo }}</td>
+      <td>{{ usuario.rol }}</td>
+      <td>
+        <button (click)="seleccionarUsuario(usuario)">Seleccionar</button>
+        <button (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="usuarioSeleccionado">
+  <h3>Editar Usuario</h3>
+  <input type="text" [(ngModel)]="usuarioSeleccionado.nombre">
+  <input type="email" [(ngModel)]="usuarioSeleccionado.correo">
+  <input type="text" [(ngModel)]="usuarioSeleccionado.rol">
+  <button (click)="actualizarUsuario()">Actualizar</button>
+
+  <h3>Categorías del Usuario</h3>
+  <ul>
+    <li *ngFor="let categoria of categoriasUsuario">
+      {{ categoria }}
+      <button (click)="eliminarCategoriaUsuario(categoria)">Eliminar</button>
+    </li>
+  </ul>
+  <h3>Agregar Categorías</h3>
+    <select [(ngModel)]="categoriaSeleccionada">
+      <option [ngValue]="null" disabled>Seleccionar Categoría</option>
+      <option *ngFor="let categoria of categoriasDisponibles" [ngValue]="categoria">{{ categoria.nombre }}</option>
+    </select>
+    <button (click)="agregarCategoriaUsuario()">Agregar Categoría</button>
+
+  <h3>Cursos del Usuario</h3>
+  <ul>
+    <li *ngFor="let curso of cursosUsuario">
+      {{ curso }}
+      <button (click)="eliminarCursoUsuario(curso)">Eliminar</button>
+    </li>
+  </ul>
+  <h3>Agregar Cursos</h3>
+    <select [(ngModel)]="cursoSeleccionado">
+      <option [ngValue]="null" disabled>Seleccionar Curso</option>
+      <option *ngFor="let curso of cursosDisponibles" [ngValue]="curso">{{ curso.nombre }}</option>
+    </select>
+    <button (click)="agregarCursoUsuario()">Agregar Curso</button>
+</div>

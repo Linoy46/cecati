@@ -1,12 +1,10 @@
-import { Category } from './category.interface';
-import { Course } from './course.interface';
-
+// src/app/interfaces/usuario-admin.interface.ts
 export interface UsuarioAdmin {
     id: number;
     nombre: string;
     correo: string;
-    contrasena?: string; // Optional: only for create/edit
     rol: 'admin' | 'usuario';
     categorias: number[]; // Array of category IDs
-    cursos: number[];     // Array of course IDs
-}
+    cursos: number[];    // Array of course IDs
+    contrasena?: string; // Optional password (only for create/update)
+  }

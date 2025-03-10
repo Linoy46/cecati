@@ -1,29 +1,25 @@
 .main-header {
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 12px 12px; /* Optional: Rounded corners */
+    border-radius: 0 0 12px 12px; 
   }
-  
   .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #611232;
     padding: 5px 15px;
-    flex-wrap: wrap; /* Allow navigation to wrap on smaller screens */
+    flex-wrap: wrap;
   }
-  
   .logo-sep {
     width: 90px;
     height: auto;
     margin-right: 10px;
   }
-  
   .logo-cecati {
     width: 65px;
     height: auto;
   }
-  
   .main-nav {
     display: flex;
     align-items: center;
@@ -60,7 +56,7 @@
   }
   
   .logout-button {
-    background-color: #58201a; /* Example color - adjust as needed */
+    background-color: #58201a;
     color: white;
     border: none;
     padding: 7px 15px;
@@ -71,7 +67,7 @@
   }
   
   .logout-button:hover {
-    background-color: #c0392b; /* Example hover color */
+    background-color: #c0392b; 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
@@ -79,7 +75,6 @@
     padding: 20px;
   }
   
-  /* Media query for smaller screens (e.g., mobile) */
   @media (max-width: 768px) {
     .top-bar {
       flex-direction: column;

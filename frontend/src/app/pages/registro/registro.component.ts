@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgIf, NgFor } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
-import { Router } from '@angular/router'; // Import Router
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [HttpClientModule, NgIf, NgFor, FormsModule, ReactiveFormsModule], // Add ReactiveFormsModule here
+  imports: [HttpClientModule, NgIf, NgFor, FormsModule, ReactiveFormsModule],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
@@ -19,7 +19,7 @@ export class RegistroComponent implements OnInit {
   mensaje: string = '';
   categorias: { id: number, nombre: string }[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {} // Inject Router
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.cargarCategorias();
@@ -37,7 +37,6 @@ export class RegistroComponent implements OnInit {
         }
       });
   }
-
 
   registrarUsuario() {
     if (!this.nombre || !this.correo || !this.contrasena || this.categoriasSeleccionadas.length === 0) {
